@@ -1,0 +1,39 @@
+.home-title {
+  text-align: center;
+  margin: 60px;
+  color: white;
+}
+
+.home-movie {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.movie-photo {
+  width: 220px;
+  height: auto;
+  border-radius: 20px;
+}
+
+.movie-group {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  padding: 20px 0;
+}
+
+.movie-name {
+  color: #FFC940;
+  letter-spacing: 1px;
+}
+
+.movie-focus {
+  color: white;
+}
+
+.location {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  border-bottom: 1px solid white;
+}
