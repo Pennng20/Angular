@@ -3,6 +3,10 @@
 </section>
 
 <section class="results">
-  <app-movielocation *ngFor="let movie of movielist" [moviepost]="movie">
+  <app-movielocation *ngFor="let movie of movielist | slice:0:5" [moviepost]="movie">
   </app-movielocation>
+</section>
+
+<section class="home-button">
+  <button type="submit" class="learnmore">閱讀更多</button>
 </section>

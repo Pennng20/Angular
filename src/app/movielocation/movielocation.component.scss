@@ -1,24 +1,19 @@
-.home-title {
-  text-align: center;
-  margin: 60px;
-  color: white;
-}
-
 .home-movie {
   max-width: 1200px;
   margin: auto;
+  padding: 20px 0 10px 0;
 }
 
 .movie-photo {
   width: 220px;
-  height: auto;
+  height: 140px;
   border-radius: 20px;
 }
 
 .movie-group {
   display: grid;
   grid-template-columns: 1fr auto;
-  gap: 20px;
+  gap:20px;
   padding: 20px 0;
 }
 
@@ -36,4 +31,8 @@
   justify-content: space-between;
   color: white;
   border-bottom: 1px solid white;
+}
+
+.location:nth-child(5) {
+  border-bottom: none;
 }
