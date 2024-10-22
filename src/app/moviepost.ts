@@ -5,4 +5,5 @@ export interface Moviepost {
   author: string;
   photo: string;
   updated: string;
+  content: string;
 }

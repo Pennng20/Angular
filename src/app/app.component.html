@@ -1,14 +1,15 @@
 <section>
-  <header>
-    <img class="home-logo" src="/assets/logo.svg" alt="logo">
-  </header>
+  <a [routerLink]="['/']">
+    <header>
+      <img class="home-logo" src="/assets/logo.svg" alt="logo">
+    </header>
+  </a>
 </section>
 
- <section class="home-banner">
-  <app-banner [bannerImage]="'/assets/banner1.jpg'" >
-  </app-banner>
- </section>
-
- <section class="homelist">
+<section class="homelist">
   <app-home></app-home>
- </section>
+</section>
+
+<section class="content">
+  <router-outlet></router-outlet>
+</section>

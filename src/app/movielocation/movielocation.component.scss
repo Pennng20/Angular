@@ -19,7 +19,13 @@
 
 .movie-name {
   color: #FFC940;
+  cursor: pointer;
   letter-spacing: 1px;
+}
+
+.movie-name:hover {
+  color: rgb(91, 187, 255);
+  cursor: pointer;
 }
 
 .movie-focus {

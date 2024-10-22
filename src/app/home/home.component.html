@@ -1,5 +1,10 @@
+<section class="home-banner">
+  <app-banner [bannerImage]="'/assets/banner1.jpg'">
+  </app-banner>
+</section>
+
 <section class="home-title">
-  <h2>最新文章</h2>
+  <h2>☾ 最新文章 ☽</h2>
 </section>
 
 <section class="results">
@@ -7,6 +12,13 @@
   </app-movielocation>
 </section>
 
-<section class="home-button">
-  <button type="submit" class="learnmore">閱讀更多</button>
+<section class="home-title">
+  <h2>☾ 全部文章 ☽</h2>
 </section>
+
+<section class="allresults">
+  <app-movielocation *ngFor="let movie of movielist| slice:6:15" [moviepost]="movie">
+  </app-movielocation>
+</section>
+
+

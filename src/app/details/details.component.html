@@ -1,0 +1,22 @@
+<article>
+  <section class="details-movie">
+    <div class="details-title">
+      <a routerLink="/details/{{ moviedetails.id }}">
+        <h3 class="movie-name">{{moviedetails.name}}</h3>
+      </a>
+      <h3 class="movie-focus">{{moviedetails.focus}}</h3>
+    </div>
+    <div class="details-location">
+      <p class="details-author">作者 : {{moviedetails.author}}</p>
+      <p class="details-updated">最後更新時間 : {{moviedetails.updated}}</p>
+    </div>
+  </section>
+
+  <section class="details-pic">
+    <img class="details-photo" [src]="moviedetails.photo" alt="{{moviedetails.name}}">
+  </section>
+
+  <section class="details-post">
+    <p>{{moviedetails.content}}</p>
+  </section>
+</article>
