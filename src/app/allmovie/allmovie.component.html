@@ -1,0 +1,16 @@
+<section class="allmovie-banner">
+  <app-banner [bannerImage]="'/assets/banner2.jpg'">
+  </app-banner>
+</section>
+
+<section class="allmovie-title">
+  <h2>☾ 全部文章 ☽</h2>
+</section>
+
+<section class="allmovie-results">
+  <app-movielocation *ngFor="let movie of movielist | slice:5:25 | slice: (page-1) * pageSize : page * pageSize; track item"
+    [moviepost]="movie">
+  </app-movielocation>
+</section>
+
+<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items" />
