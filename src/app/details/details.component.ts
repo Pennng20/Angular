@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 })
 export class DetailsComponent {
   route: ActivatedRoute = inject(ActivatedRoute);
-  moviepost = inject(MovieService);
+  movieService = inject(MovieService);
   moviedetails: Moviepost = {
     id: 0,
     name: '',
@@ -28,8 +28,9 @@ export class DetailsComponent {
   constructor() {
     const getMovielocationId = Number(this.route.snapshot.params['id']);
     console.log(getMovielocationId)
-    this.moviepost.getMoviepostId(getMovielocationId).then(response => {
+    this.movieService.getMoviepostId(getMovielocationId).then(response => {
       this.moviedetails = response;
+      console.log(response)
     })
   }
 }
