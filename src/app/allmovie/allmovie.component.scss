@@ -4,9 +4,46 @@
   color: white;
 }
 
-ngb-pagination{
+ngb-pagination {
   display: flex;
   justify-content: center;
   padding: 40px 0;
 }
 
+ngb-pagination .page-link {
+  color: #ffffff;
+  background-color: #000000;
+  border: 1px solid #ffffff;
+  padding: 8px 16px;
+}
+
+.allmovie-search {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+input[type="text"] {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 16px;
+  width: 600px;
+  padding: 10px 20px;
+  margin: 0 20px;
+  color: white;
+}
+
+button {
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 16px;
+  color: white;
+  padding: 10px;
+  width: 100px;
+
+}
+
+button:hover {
+  background-color: white;
+  color: black;
+}

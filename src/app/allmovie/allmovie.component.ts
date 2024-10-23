@@ -15,15 +15,30 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './allmovie.component.scss'
 })
 export class AllmovieComponent {
-  items = 20;
+  items = 25;
   page = 1;
   pageSize = 10;
   movielist: Moviepost[] = [];
   movieservice: MovieService = inject(MovieService);
+  moviesearch: Moviepost[] = [];
 
   ngOnInit(): void {
-    this.movieservice.getMoviepost().then((movieList: Moviepost[]) => {
-      this.movielist = movieList;
+    this.movieservice.getMoviepost().then((movielist: Moviepost[]) => {
+      this.movielist = movielist;
+      this.moviesearch = movielist;
     });
+  }
+
+  SearchResults(text: string) {
+    if (!text) {
+      this.moviesearch = this.movielist;
+      return;
+    }
+
+    this.moviesearch = this.movielist.filter(
+      Moviepost => Moviepost.name.includes(text)
+    );
+
+    console.log(this.moviesearch)
   }
 }

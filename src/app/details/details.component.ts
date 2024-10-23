@@ -27,10 +27,8 @@ export class DetailsComponent {
 
   constructor() {
     const getMovielocationId = Number(this.route.snapshot.params['id']);
-    console.log(getMovielocationId)
     this.movieService.getMoviepostId(getMovielocationId).then(response => {
       this.moviedetails = response;
-      console.log(response)
     })
   }
 }

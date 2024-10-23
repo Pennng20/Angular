@@ -7,8 +7,15 @@
   <h2>☾ 全部文章 ☽</h2>
 </section>
 
+<section class="allmovie-search">
+  <form>
+    <input type="text" class="search-input" placeholder="請輸入電影名稱" #search>
+    <button class="Search-button" type="button" (click)="SearchResults(search.value)">搜尋</button>
+  </form>
+</section>
+
 <section class="allmovie-results">
-  <app-movielocation *ngFor="let movie of movielist | slice:5:25 | slice: (page-1) * pageSize : page * pageSize; track item"
+  <app-movielocation *ngFor="let movie of moviesearch| slice: (page-1) * pageSize : page * pageSize"
     [moviepost]="movie">
   </app-movielocation>
 </section>
