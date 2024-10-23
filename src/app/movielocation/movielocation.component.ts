@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   styleUrl: './movielocation.component.scss'
 })
 export class MovielocationComponent {
-  @Input() moviepost: Moviepost = {
+  @Input() moviePost: Moviepost = {
     id: 0,
     name: '',
     focus: '',

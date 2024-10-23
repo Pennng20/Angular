@@ -13,9 +13,9 @@ import { RouterModule } from '@angular/router';
   styleUrl: './details.component.scss'
 })
 export class DetailsComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  movieService = inject(MovieService);
-  moviedetails: Moviepost = {
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private movieService = inject(MovieService);
+  private _movieDetails: Moviepost = {
     id: 0,
     name: '',
     focus: '',
@@ -25,10 +25,18 @@ export class DetailsComponent {
     content: ''
   };
 
+  get movieDetails(): Moviepost {
+    return this._movieDetails;
+  }
+
+  set movieDetails(value: Moviepost) {
+    this._movieDetails = value;
+  }
+
   constructor() {
     const getMovielocationId = Number(this.route.snapshot.params['id']);
     this.movieService.getMoviepostId(getMovielocationId).then(response => {
-      this.moviedetails = response;
+      this.movieDetails = response;
     })
   }
 }

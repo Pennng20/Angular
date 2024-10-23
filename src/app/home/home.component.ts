@@ -14,12 +14,21 @@ import { BannerComponent } from '../banner/banner.component';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  movielist: Moviepost[] = [];
-  movieservice: MovieService = inject(MovieService);
+  //設為私有層級
+  private _movieList: Moviepost[] = [];
+  private movieService: MovieService = inject(MovieService);
+
+  get movieList(): Moviepost[] {
+    return this._movieList;
+  }
+
+  set movieList(value: Moviepost[]) {
+    this._movieList = value;
+  }
 
   ngOnInit(): void {
-    this.movieservice.getMoviepost().then((movieList: Moviepost[]) => {
-      this.movielist = movieList;
+    this.movieService.getMoviepost().then((movieList: Moviepost[]) => {
+      this.movieList = movieList; // 使用存取子來設置值
     });
   }
 }

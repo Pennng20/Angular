@@ -15,8 +15,8 @@
 </section>
 
 <section class="allmovie-results">
-  <app-movielocation *ngFor="let movie of moviesearch| slice: (page-1) * pageSize : page * pageSize"
-    [moviepost]="movie">
+  <app-movielocation *ngFor="let movie of movieSearch| slice: (page-1) * pageSize : page * pageSize"
+    [moviePost]="movie">
   </app-movielocation>
 </section>
 

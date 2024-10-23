@@ -15,30 +15,55 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './allmovie.component.scss'
 })
 export class AllmovieComponent {
-  items = 25;
-  page = 1;
-  pageSize = 10;
-  movielist: Moviepost[] = [];
-  movieservice: MovieService = inject(MovieService);
-  moviesearch: Moviepost[] = [];
+  private static readonly ITEMS_PAGE = 25;
+  private static readonly PAGE = 1;
+  private static readonly PAGE_SIZE = 10;
+
+  private _movieList: Moviepost[] = [];
+  private movieService: MovieService = inject(MovieService);
+  private _movieSearch: Moviepost[] = [];
+
+  page = AllmovieComponent.PAGE;
+
+  get items() {
+    return AllmovieComponent.ITEMS_PAGE;
+  }
+
+  get pageSize() {
+    return AllmovieComponent.PAGE_SIZE;
+  }
+
+  get movieList(): Moviepost[] {
+    return this._movieList;
+  }
+
+  set movieList(value: Moviepost[]) {
+    this._movieList = value;
+  }
+
+  get movieSearch(): Moviepost[] {
+    return this._movieSearch;
+  }
+
+  set movieSearch(value: Moviepost[]) {
+    this._movieSearch = value;
+  }
 
   ngOnInit(): void {
-    this.movieservice.getMoviepost().then((movielist: Moviepost[]) => {
-      this.movielist = movielist;
-      this.moviesearch = movielist;
+    this.movieService.getMoviepost().then((movielist: Moviepost[]) => {
+      this.movieList = movielist;
+      this.movieSearch = movielist;
     });
   }
 
   SearchResults(text: string) {
     if (!text) {
-      this.moviesearch = this.movielist;
+      this.movieSearch = this.movieList;
       return;
     }
 
-    this.moviesearch = this.movielist.filter(
+    this.movieSearch = this.movieList.filter(
       Moviepost => Moviepost.name.includes(text)
     );
-
-    console.log(this.moviesearch)
   }
 }
