@@ -10,6 +10,10 @@ import { RouterModule } from '@angular/router';
   templateUrl: './movielocation.component.html',
   styleUrl: './movielocation.component.scss'
 })
+
+/**
+ * @Input 父組件傳子組件，渲染
+ */
 export class MovielocationComponent {
   @Input() moviePost: Moviepost = {
     id: 0,

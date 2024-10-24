@@ -13,10 +13,18 @@ import { RouterOutlet, RouterModule } from '@angular/router';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  //設為私有層級
+  /**
+   * @public 允許任何程式碼使用。
+   * @private 只能在該類別的內部被訪問，外部無法直接存取。
+   * movieList變數要是Moviepost[]的類型，初始化為[]
+   */
   private _movieList: Moviepost[] = [];
-  private movieService: MovieService = inject(MovieService);
+  public movieService: MovieService = inject(MovieService);
 
+  /**
+   * @get 獲取數據
+   * @set 接收的值必須是一個Moviepost的陣列
+   */
   get movieList(): Moviepost[] {
     return this._movieList;
   }
@@ -24,10 +32,12 @@ export class HomeComponent {
   set movieList(value: Moviepost[]) {
     this._movieList = value;
   }
-
+  /**
+   * getMoviepost方法回傳promise，.then接收回傳的值是Moviepost[]類型並賦值
+   */
   ngOnInit(): void {
     this.movieService.getMoviepost().then((movieList: Moviepost[]) => {
-      this.movieList = movieList; // 使用存取子來設置值
+      this.movieList = movieList;
     });
   }
 }
