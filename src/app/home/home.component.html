@@ -1,6 +1,7 @@
 <section class="home-banner">
-  <app-banner [bannerImage]="'/assets/banner1.jpg'">
-  </app-banner>
+  <div class="banner">
+    <img src="/assets/banner1.jpg" alt="home-banner" class="img-fluid">>
+  </div>
 </section>
 
 <section class="home-title">
@@ -8,8 +9,12 @@
 </section>
 
 <section class="results">
-  <app-movielocation *ngFor="let movie of movieList | slice:0:5" [moviePost]="movie">
-  </app-movielocation>
+  <div class="container">
+    <div class="row">
+      <app-movielocation *ngFor="let movie of movieList | slice:0:5" class="col-12 mb-4" [moviePost]="movie">
+      </app-movielocation>
+    </div>
+  </div>
 </section>
 
 <section class="home-btn">

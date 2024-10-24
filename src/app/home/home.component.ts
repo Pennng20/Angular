@@ -4,12 +4,11 @@ import { MovielocationComponent } from '../movielocation/movielocation.component
 import { MovieService } from '../movie.service';
 import { Moviepost } from '../moviepost';
 import { RouterOutlet, RouterModule } from '@angular/router';
-import { BannerComponent } from '../banner/banner.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent, BannerComponent],
+  imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

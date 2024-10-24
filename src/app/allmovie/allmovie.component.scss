@@ -18,18 +18,21 @@ ngb-pagination .page-link {
 }
 
 .allmovie-search {
-  display: flex;
-  justify-content: center;
+  display: block;
   padding-bottom: 30px;
+}
+
+form {
+  text-align: center;
 }
 
 input[type="text"] {
   background-color: black;
   border: 1px solid white;
   border-radius: 16px;
-  width: 600px;
+  width: 70%;
   padding: 10px 20px;
-  margin: 0 20px;
+  margin: 0 10px;
   color: white;
 }
 
@@ -46,4 +49,9 @@ button {
 button:hover {
   background-color: white;
   color: black;
+}
+
+.banner {
+  width: 100%;
+  height: auto;
 }

@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BannerComponent } from '../banner/banner.component';
 import { MovieService } from '../movie.service';
 import { Moviepost } from '../moviepost';
 import { MovielocationComponent } from '../movielocation/movielocation.component';
@@ -10,7 +9,7 @@ import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-allmovie',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, BannerComponent, MovielocationComponent, NgbPaginationModule],
+  imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent, NgbPaginationModule],
   templateUrl: './allmovie.component.html',
   styleUrl: './allmovie.component.scss'
 })

@@ -1,6 +1,7 @@
-<section class="allmovie-banner">
-  <app-banner [bannerImage]="'/assets/banner2.jpg'">
-  </app-banner>
+<section class="home-banner">
+  <div class="banner">
+    <img src="/assets/banner2.jpg" alt="home-banner" class="img-fluid">>
+  </div>
 </section>
 
 <section class="allmovie-title">
@@ -15,9 +16,13 @@
 </section>
 
 <section class="allmovie-results">
-  <app-movielocation *ngFor="let movie of movieSearch| slice: (page-1) * pageSize : page * pageSize"
-    [moviePost]="movie">
-  </app-movielocation>
+  <div class="container">
+    <div class="row">
+      <app-movielocation *ngFor="let movie of movieSearch| slice: (page-1) * pageSize : page * pageSize"
+        class="col-12 mb-4" [moviePost]="movie">
+      </app-movielocation>
+    </div>
+  </div>
 </section>
 
 <ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items" />

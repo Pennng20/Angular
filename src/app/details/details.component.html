@@ -1,21 +1,23 @@
-<article>
-  <section class="details-movie">
-    <div class="details-title">
+<article class="container">
+  <section class="details-movie row-mb-4">
+    <div class="details-title col-12">
       <h2 class="movie-name">{{movieDetails.name}}</h2>
       <h2 class="movie-focus">{{movieDetails.focus}}</h2>
     </div>
-    <div class="details-location">
+    <div class="details-location col-12">
       <p class="details-author">作者 : {{movieDetails.author}}</p>
       <p class="details-updated">最後更新時間 : {{movieDetails.updated}}</p>
     </div>
   </section>
 
-  <section class="details-pic">
-    <img class="details-photo" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
+  <section class="details-pic mb-4">
+    <img class="details-photo img-fluid" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
   </section>
 
-  <section class="details-post">
-    <pre>{{movieDetails.content}}</pre>
+  <section class="details-post mb-4">
+    <div class="col-12">
+      <pre class="content-text">{{movieDetails.content}}</pre>
+    </div>
   </section>
 
   <section class="back">
