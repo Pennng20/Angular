@@ -7,9 +7,12 @@ article {
   display: grid;
   //第一個欄位的寬度為可用空間的1份，第二個欄位的寬度根據內容自動調整。
   grid-template-columns: 1fr auto;
+  align-items: end;
 }
 
 .movie-name {
+  font-size: 2.5vw;
+  min-width: 0;
   color: #FFC940;
 }
 
@@ -19,7 +22,6 @@ article {
 
 .details-location {
   color: white;
-  margin: auto 0;
 }
 
 .details-pic {
