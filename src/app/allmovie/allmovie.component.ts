@@ -34,11 +34,11 @@ export class AllmovieComponent {
    * @get 透過funtion模擬 呼叫 物件屬性，不能有參數、且要有回傳值。
    * @set 透過funtion模擬 賦值 到物件屬性，只能有一個參數。
    */
-  get items() {
+  get items():number {
     return AllmovieComponent.ITEMS_PAGE;
   }
 
-  get pageSize() {
+  get pageSize():number {
     return AllmovieComponent.PAGE_SIZE;
   }
   //獲取數據
@@ -69,7 +69,7 @@ export class AllmovieComponent {
   /**
    * @includes 用來檢查電影名稱中是否有匹配的文字。
    */
-  SearchResults(text: string) {
+  searchResults(text: string) {
     if (!text) {
       this.movieSearch = this.movieList;
       return;

@@ -1,13 +1,12 @@
 article {
   max-width: 1200px;
-  margin: auto;
 }
 
-.details-movie {
+.movie-details {
   padding: 20px 0;
   display: grid;
+  //第一個欄位的寬度為可用空間的1份，第二個欄位的寬度根據內容自動調整。
   grid-template-columns: 1fr auto;
-  gap: 20px;
 }
 
 .movie-name {
@@ -45,9 +44,8 @@ article {
 }
 
 .content-text {
+  //將 \n 符號轉換為實際的換行
   white-space: pre-wrap;
-  word-wrap: break-word;
-  font-size: 1rem;
   max-width: 100%;
 }
 
@@ -65,7 +63,7 @@ article {
   padding: 10px 24px;
 }
 
-.goback:hover{
+.goback:hover {
   background-color: white;
   color: black;
 }

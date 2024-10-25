@@ -43,7 +43,7 @@ export class DetailsComponent {
    * 把變數轉換成數字，getMoviepostId方法帶入參數，.then回傳值給movieDetails
    */
   constructor() {
-    const getMovielocationId = Number(this.route.snapshot.params['id']);
+    const getMovielocationId:number = Number(this.route.snapshot.params['id']);
     this.movieService.getMoviepostId(getMovielocationId).then(movieId => {
       this.movieDetails = movieId;
     })
