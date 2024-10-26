@@ -5,7 +5,7 @@ import { MovieService } from '../movie.service';
 import { Moviepost } from '../moviepost';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+
 
 @Component({
   selector: 'app-home',
@@ -28,26 +28,26 @@ export class HomeComponent {
    * @get 獲取數據
    * @set 接收的值必須是一個Moviepost的陣列
    */
-  get images(): string[] {
+  public get images(): string[] {
     return this._images;
   }
 
-  get movieList(): Moviepost[] {
+  public set images(value: string[]) {
+    this._images = value;
+  }
+
+  public get movieList(): Moviepost[] {
     return this._movieList;
   }
 
-  set movieList(value: Moviepost[]) {
+  public set movieList(value: Moviepost[]) {
     this._movieList = value;
   }
 
-  constructor(config: NgbCarouselConfig) {
-    config.interval = 3000;
-    config.wrap = true;
-  }
   /**
    * getMoviepost方法回傳promise，.then接收回傳的值是Moviepost[]類型並賦值
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.movieService.getMoviepost().then((movieList: Moviepost[]) => {
       this.movieList = movieList;
     });

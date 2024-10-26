@@ -3,15 +3,13 @@ article {
 }
 
 .movie-details {
-  padding: 20px 0;
+  // padding: 20px 0;
   display: grid;
   //第一個欄位的寬度為可用空間的1份，第二個欄位的寬度根據內容自動調整。
   grid-template-columns: 1fr auto;
-  align-items: end;
 }
 
 .movie-name {
-  font-size: 2.5vw;
   min-width: 0;
   color: #FFC940;
 }
@@ -27,7 +25,7 @@ article {
 .details-pic {
   display: flex;
   justify-content: center;
-  padding: 40px 0;
+  padding: 30px 0;
 }
 
 .details-photo {
@@ -48,7 +46,9 @@ article {
 .content-text {
   //將 \n 符號轉換為實際的換行
   white-space: pre-wrap;
-  max-width: 100%;
+  max-width: 800px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 .back {
@@ -62,10 +62,24 @@ article {
   border-radius: 20px;
   margin: 10px 0 50px 0;
   color: white;
-  padding: 10px 24px;
+  padding: 8px 24px;
 }
 
 .goback:hover {
   background-color: white;
   color: black;
+}
+
+@media (max-width: 600px) {
+  .movie-name {
+    font-size: 24px;
+  }
+
+  .movie-focus {
+    font-size: 20px;
+  }
+
+  .details-post {
+    font-size: 18px;
+  }
 }

@@ -29,38 +29,42 @@ export class AllmovieComponent {
   private _movieSearch: Moviepost[] = [];
   public movieService: MovieService = inject(MovieService);
 
-  page = AllmovieComponent.PAGE;
+  public page = AllmovieComponent.PAGE;
   /**
    * @get 透過funtion模擬 呼叫 物件屬性，不能有參數、且要有回傳值。
    * @set 透過funtion模擬 賦值 到物件屬性，只能有一個參數。
    */
-  get items():number {
+  public getPage(): number {
+    return this.page;
+  }
+
+  public get items():number {
     return AllmovieComponent.ITEMS_PAGE;
   }
 
-  get pageSize():number {
+  public get pageSize():number {
     return AllmovieComponent.PAGE_SIZE;
   }
   //獲取數據
-  get movieList(): Moviepost[] {
+  public get movieList(): Moviepost[] {
     return this._movieList;
   }
   //接收的值必須是一個Moviepost的陣列
-  set movieList(value: Moviepost[]) {
+  public set movieList(value: Moviepost[]) {
     this._movieList = value;
   }
 
-  get movieSearch(): Moviepost[] {
+  public get movieSearch(): Moviepost[] {
     return this._movieSearch;
   }
 
-  set movieSearch(value: Moviepost[]) {
+  public set movieSearch(value: Moviepost[]) {
     this._movieSearch = value;
   }
   /**
    * 方法調用回傳promise，.then接收回傳的結果
    */
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.movieService.getMoviepost().then((movielist: Moviepost[]) => {
       this.movieList = movielist;
       this.movieSearch = movielist;
@@ -69,7 +73,7 @@ export class AllmovieComponent {
   /**
    * @includes 用來檢查電影名稱中是否有匹配的文字。
    */
-  searchResults(text: string) {
+  protected searchResults(text: string) {
     if (!text) {
       this.movieSearch = this.movieList;
       return;

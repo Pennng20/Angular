@@ -7,17 +7,16 @@ const routeConfig: Routes = [
   {
     path: '',
     component: HomeComponent,
-    title: 'Home Page'
+    title: '首頁'
   },
   {
     path: 'details/:id',
     component: DetailsComponent,
-    title: 'Details Page'
   },
   {
     path: 'allmovie',
     component: AllmovieComponent,
-    title: 'All Movie'
+    title: '全部電影'
   }
 ];
 
