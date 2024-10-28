@@ -1,21 +1,21 @@
 @if (images) {
-	<ngb-carousel>
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img [src]="images[0]" alt="Random first slide" class="img-fluid"/>
-			</div>
-		</ng-template>
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img [src]="images[1]" alt="Random second slide" class="img-fluid"/>
-			</div>
-		</ng-template>
-		<ng-template ngbSlide>
-			<div class="picsum-img-wrapper">
-				<img [src]="images[2]" alt="Random third slide" class="img-fluid"/>
-			</div>
-		</ng-template>
-	</ngb-carousel>
+<ngb-carousel [interval]="3000">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[0]" alt="Random first slide" class="img-fluid" />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[1]" alt="Random second slide" class="img-fluid" />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[2]" alt="Random third slide" class="img-fluid" />
+    </div>
+  </ng-template>
+</ngb-carousel>
 }
 
 <section class="home-title">
@@ -25,6 +25,7 @@
 <section class="results">
   <div class="container">
     <div class="row">
+      <!-- slice從第 0 個開始，到第 5 個結束（不包括第 5 個）。 -->
       <app-movielocation *ngFor="let movie of movieList | slice:0:5" class="col-12 mb-4" [moviePost]="movie">
       </app-movielocation>
     </div>

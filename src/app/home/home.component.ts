@@ -15,11 +15,11 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  private _images = ['/assets/banner2.jpg', '/assets/banner1.jpg', '/assets/banner3.jpg'];
+  private _images = ['/assets/banner1.jpg', '/assets/banner2.jpg', '/assets/banner3.jpg'];
   /**
    * @public 允許任何程式碼使用。
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
-   * movieList變數要是Moviepost[]的類型，初始化為[]
+   * movieList變數要是Moviepost[]的類型，初始化為空陣列。
    */
   private _movieList: Moviepost[] = [];
   public movieService: MovieService = inject(MovieService);
@@ -45,7 +45,8 @@ export class HomeComponent {
   }
 
   /**
-   * getMoviepost方法回傳promise，.then接收回傳的值是Moviepost[]類型並賦值
+   * getMoviepost方法回傳promise，.then接收回傳的值是Moviepost[]類型並賦值。
+   * void 表示ngOnInit方法不會返回任何東西。
    */
   public ngOnInit(): void {
     this.movieService.getMoviepost().then((movieList: Moviepost[]) => {

@@ -3,7 +3,6 @@ article {
 }
 
 .movie-details {
-  // padding: 20px 0;
   display: grid;
   //第一個欄位的寬度為可用空間的1份，第二個欄位的寬度根據內容自動調整。
   grid-template-columns: 1fr auto;
@@ -44,7 +43,7 @@ article {
 }
 
 .content-text {
-  //將 \n 符號轉換為實際的換行
+  //自動換行
   white-space: pre-wrap;
   max-width: 800px;
   text-align: center;

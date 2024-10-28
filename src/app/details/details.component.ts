@@ -41,9 +41,9 @@ export class DetailsComponent {
     this._movieDetails = value;
   }
   /**
-   * 把變數轉換成數字，getMoviepostId方法帶入參數，.then回傳值給movieDetails
+   * 把變數轉換成數字，getMoviepostId方法帶入參數，.then回傳值給movieDetails。
    * setTitle()是Title服務提供的一個方法，用於設置當前頁面的標題。
-   * 調用setTitle方法，會更新瀏覽器標籤中的標題
+   * 調用setTitle方法，會更新瀏覽器標籤中的標題。
    */
   public ngOnInit() {
     const getMovielocationId: number = Number(this.route.snapshot.params['id']);

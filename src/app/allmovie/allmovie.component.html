@@ -1,11 +1,22 @@
-<!-- img-fluid : 圖片的最大寬度被設置為100%，圖片會根據其父容器的寬度自動縮放 -->
-<i class="fa-solid fa-camera-movie"></i>
-
-<section class="home-banner">
-  <div class="banner">
-    <img src="/assets/banner4.jpg" alt="home-banner" class="img-fluid">>
-  </div>
-</section>
+@if (images) {
+<ngb-carousel [interval]="3000">
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[0]" alt="Random first slide" class="img-fluid" />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[1]" alt="Random second slide" class="img-fluid" />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[2]" alt="Random third slide" class="img-fluid" />
+    </div>
+  </ng-template>
+</ngb-carousel>
+}
 
 <section class="allmovie-title">
   <h2>☾ 全部文章 ☽</h2>
@@ -28,4 +39,5 @@
   </div>
 </section>
 
-<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items" />
+<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items"
+  (pageChange)="onPageChange($event)"></ngb-pagination>/>
