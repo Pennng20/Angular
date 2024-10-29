@@ -16,12 +16,12 @@ import { RouterModule } from '@angular/router';
  */
 export class MovielocationComponent {
   @Input() moviePost: Moviepost = {
-    id: 0,
+    id: 1,
     name: '',
     focus: '',
     author: '',
     photo: '',
-    updated: '',
+    updateTime: '',
     content: ''
   };
 }

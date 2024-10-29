@@ -18,16 +18,16 @@ export class DetailsComponent {
    * @public 允許任何程式碼使用。
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
    */
-  public movieService = inject(MovieService);
+  private movieService = inject(MovieService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
   private _movieDetails: Moviepost = {
-    id: 0,
+    id: 1,
     name: '',
     focus: '',
     author: '',
     photo: '',
-    updated: '',
+    updateTime: '',
     content: ''
   };
   /**
@@ -47,7 +47,7 @@ export class DetailsComponent {
    */
   public ngOnInit() {
     const getMovielocationId: number = Number(this.route.snapshot.params['id']);
-    this.movieService.getMoviepostId(getMovielocationId).then(movieId => {
+    this.movieService.getMoviePostId(getMovielocationId).then(movieId => {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
     })

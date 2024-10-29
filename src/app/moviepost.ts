@@ -4,6 +4,6 @@ export interface Moviepost {
   focus: string;
   author: string;
   photo: string;
-  updated: string;
+  updateTime: string;
   content: string;
 }

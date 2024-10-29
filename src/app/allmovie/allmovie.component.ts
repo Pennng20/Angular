@@ -80,15 +80,19 @@ export class AllmovieComponent {
   }
   /**
    * 方法調用回傳promise，.then接收回傳的結果
+   * void 表示getMoviepost方法不會返回任何東西。
    */
   public ngOnInit(): void {
-    this.movieService.getMoviepost().then((movielist: Moviepost[]) => {
+    this.movieService.getMoviePost().then((movielist: Moviepost[]) => {
       this.movieList = movielist;
       this.movieSearch = movielist;
     });
   }
+
   /**
-   * @includes 用來檢查電影名稱中是否有匹配的文字。
+   * 用來檢查電影名稱中是否有匹配的文字。
+   * @param text 電影名稱
+   * @returns 電影
    */
   protected searchResults(text: string) {
     if (!text) {
@@ -109,7 +113,7 @@ export class AllmovieComponent {
     this.scrollToTop();
   }
 
-  private scrollToTop() {
+  private scrollToTop(): void {
     window.scrollTo({ top: 0 });
   }
 }
