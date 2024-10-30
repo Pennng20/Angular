@@ -16,13 +16,11 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 })
 export class AllmovieComponent {
   /**
-   * @public 允許任何程式碼使用。
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
-   * 把神奇數字定義為常數
    * @static 不需要創建實例(let myCar = new Car();) 可以直接通過類名來訪問。
    * @readonly 初始化後不能被修改。通常在構造函數中賦值，賦值後不能再次修改。適合用來定義不應該被意外修改的屬性。
+   * @memberof AllmovieComponent 電影組件
    */
-  private _images = ['/assets/banner4.jpg', '/assets/banner5.jpg', '/assets/banner6.jpg'];
 
   private static readonly ITEMS_PAGE = 25;
   private static readonly PAGE = 1;
@@ -30,20 +28,24 @@ export class AllmovieComponent {
 
   private _movieList: Moviepost[] = [];
   private _movieSearch: Moviepost[] = [];
-  public movieService: MovieService = inject(MovieService);
+  private movieService: MovieService = inject(MovieService);
   private _currentPage = 1; //當前頁碼
 
-  public page = AllmovieComponent.PAGE;
   /**
-   * @get 透過funtion模擬 呼叫 物件屬性，不能有參數、且要有回傳值。
-   * @set 透過funtion模擬 賦值 到物件屬性，只能有一個參數。
+   * @get 不能有參數、且要有回傳值。
+   * @set 賦值到物件屬性，只能有一個參數。
+   * @type {string[]} 返回的類型要是物件陣列
    */
-  public get images(): string[] {
-    return this._images;
+
+  private _page: number = AllmovieComponent.PAGE;
+
+  public get page(): number {
+    return this._page;
   }
 
-  public set images(value: string[]) {
-    this._images = value;
+  private set page(value: number) {
+    this._page = value;
+    this.scrollToTop();
   }
 
   public get items(): number {
@@ -53,12 +55,12 @@ export class AllmovieComponent {
   public get pageSize(): number {
     return AllmovieComponent.PAGE_SIZE;
   }
-  //獲取數據
-  public get movieList(): Moviepost[] {
+
+  private get movieList(): Moviepost[] {
     return this._movieList;
   }
-  //接收的值必須是一個Moviepost的陣列
-  public set movieList(value: Moviepost[]) {
+
+  private set movieList(value: Moviepost[]) {
     this._movieList = value;
   }
 
@@ -66,7 +68,7 @@ export class AllmovieComponent {
     return this._movieSearch;
   }
 
-  public set movieSearch(value: Moviepost[]) {
+  private set movieSearch(value: Moviepost[]) {
     this._movieSearch = value;
   }
 
@@ -74,9 +76,12 @@ export class AllmovieComponent {
     return this._currentPage;
   }
 
+  private scrollToTop(): void {
+    window.scrollTo({ top: 0 });
+  }
+
   public set currentPage(value: number) {
     this._currentPage = value;
-    this.scrollToTop();
   }
   /**
    * 方法調用回傳promise，.then接收回傳的結果
@@ -88,13 +93,11 @@ export class AllmovieComponent {
       this.movieSearch = movielist;
     });
   }
-
   /**
    * 用來檢查電影名稱中是否有匹配的文字。
    * @param text 電影名稱
-   * @returns 電影
    */
-  protected searchResults(text: string) {
+  public searchResults(text: string) {
     if (!text) {
       this.movieSearch = this.movieList;
       return;
@@ -106,15 +109,10 @@ export class AllmovieComponent {
   }
   /**void 表示onPageChange方法不會返回任何東西。
    * 更新currentPage為新的頁碼
-   * @newPage 參數為數字型別，賦值給currentPage，調用scrollToTop()方法滾動到頂部。
+   * @newPage 參數為數字型別，賦值給currentPage。
    */
   public onPageChange(newPage: number): void {
     this._currentPage = newPage;
-    this.scrollToTop();
-  }
-
-  private scrollToTop(): void {
-    window.scrollTo({ top: 0 });
   }
 }
 

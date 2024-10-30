@@ -2,15 +2,15 @@
   <div class="movie-group">
     <div class="text">
       <a [routerLink]="['/details', moviePost.id]">
-        <h3 class="movie-name">{{ moviePost.name }}</h3>
+        <h3 class="fs-3">✎ 電影影評 | {{ moviePost.name }}</h3>
       </a>
-      <h3 class="movie-focus">{{moviePost.focus}}</h3>
+      <h3 class="fs-4">電影金句 :「{{moviePost.focus}}」</h3>
     </div>
     <img class="movie-photo" [src]="moviePost.photo" alt="{{moviePost.name}}">
   </div>
 
   <div class="location">
-    <p class="movie-author">作者 : {{moviePost.author}}</p>
-    <p class="movie-updated">更新時間 : {{moviePost.updateTime}}</p>
+    <p class="fs-6">作者 : {{moviePost.author}}</p>
+    <p class="fs-6">更新時間 : {{moviePost.updateTime}}</p>
   </div>
 </section>

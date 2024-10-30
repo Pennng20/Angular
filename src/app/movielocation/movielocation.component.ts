@@ -11,9 +11,6 @@ import { RouterModule } from '@angular/router';
   styleUrl: './movielocation.component.scss'
 })
 
-/**
- * @Input 父組件傳子組件，渲染
- */
 export class MovielocationComponent {
   @Input() moviePost: Moviepost = {
     id: 1,

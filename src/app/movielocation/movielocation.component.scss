@@ -5,8 +5,8 @@
 }
 
 .movie-photo {
-  width: 220px;
-  height: 146px;
+  width: 200px;
+  height: 130px;
   border-radius: 20px;
 }
 
@@ -16,38 +16,21 @@
   padding: 0 0 16px 0;
 }
 
-.movie-name {
-  color: #FFC940;
-  cursor: pointer;
-  letter-spacing: 1px;
-}
-
-.movie-name:hover {
-  color: rgb(91, 187, 255);
+.fs-3 {
   cursor: pointer;
 }
 
-.movie-focus {
-  color: white;
+.fs-3:hover {
+  color: var(--texthover-color);
 }
 
 .location {
   display: flex;
   justify-content: space-between;
-  color: white;
-  border-bottom: 1px solid white;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--text-color);
 }
 
 a {
   text-decoration: none;
-}
-
-@media (max-width: 600px) {
-  .movie-name {
-    font-size: 20px;
-  }
-
-  .movie-focus {
-    font-size: 18px;
-  }
 }

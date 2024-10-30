@@ -1,5 +1,5 @@
 @if (images) {
-<ngb-carousel [interval]="3000">
+<ngb-carousel class="banner" [interval]="3000">
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
       <img [src]="images[0]" alt="Random first slide" class="img-fluid" />
@@ -13,6 +13,11 @@
   <ng-template ngbSlide>
     <div class="picsum-img-wrapper">
       <img [src]="images[2]" alt="Random third slide" class="img-fluid" />
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="picsum-img-wrapper">
+      <img [src]="images[3]" alt="Random third slide" class="img-fluid" />
     </div>
   </ng-template>
 </ngb-carousel>
@@ -32,8 +37,8 @@
   </div>
 </section>
 
-<section class="home-btn">
+<section class="button">
   <a [routerLink]="['/allmovie']">
-    <button class="allpost">閱讀更多</button>
+    <button class="btn btn-primary new-btn">閱讀更多</button>
   </a>
 </section>

@@ -1,5 +1,6 @@
 article {
-  max-width: 1200px;
+  max-width: 760px;
+  margin-top: 80px;
 }
 
 .movie-details {
@@ -8,77 +9,38 @@ article {
   grid-template-columns: 1fr auto;
 }
 
-.movie-name {
-  min-width: 0;
-  color: #FFC940;
-}
-
-.movie-focus {
-  color: white;
-}
-
-.details-location {
-  color: white;
-}
-
 .details-pic {
   display: flex;
   justify-content: center;
-  padding: 30px 0;
-}
+  padding: 30px 0 0 0;
 
-.details-photo {
-  margin: auto 0;
-  border-radius: 20px;
+  img {
+    width: 740px;
+    height: 100%;
+    border-radius: 20px;
+  }
 }
 
 .details-post {
   text-align: center;
   font-size: 20px;
-  line-height: 40px;
+  line-height: 36px;
+  margin: 24px 0;
 
   pre {
-    color: white;
+    color: var(--text-color);
+  }
+
+  .content-text {
+    //自動換行
+    text-indent: 2em;
+    white-space: pre-wrap;
+    max-width: 800px;
+    text-align: left;
   }
 }
 
-.content-text {
-  //自動換行
-  white-space: pre-wrap;
-  max-width: 800px;
-  text-align: center;
-  margin: 0 auto;
-}
-
-.back {
-  display: flex;
-  justify-content: center;
-}
-
-.goback {
-  background-color: black;
-  border: 1px solid white;
-  border-radius: 20px;
-  margin: 10px 0 50px 0;
-  color: white;
-  padding: 8px 24px;
-}
-
-.goback:hover {
-  background-color: white;
-  color: black;
-}
-
-@media (max-width: 600px) {
-  .movie-name {
-    font-size: 24px;
-  }
-
-  .movie-focus {
-    font-size: 20px;
-  }
-
-  .details-post {
-    font-size: 18px;
-  }
+.location p {
+  text-align: end;
+  margin-right: 10px;
 }

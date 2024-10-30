@@ -1,28 +1,30 @@
 <article class="container">
-  <section class="movie-details row-mb-4">
+  <section class="movie-details row">
     <div class="details-title col-12">
-      <h2 class="movie-name">{{movieDetails.name}}</h2>
-      <h2 class="movie-focus">{{movieDetails.focus}}</h2>
-    </div>
-    <div class="details-location col-12">
-      <p class="details-author">作者 : {{movieDetails.author}}</p>
-      <p class="details-updated">更新時間 : {{movieDetails.updateTime}}</p>
+      <h2 class="fs-3">✎ 電影影評 | {{movieDetails.name}}</h2>
+      <h2 class="fs-4">電影金句 :「{{movieDetails.focus}}」</h2>
     </div>
   </section>
 
-  <section class="details-pic mb-4">
+  <section class="details-pic mb-2">
     <img class="details-photo img-fluid" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
   </section>
 
-  <section class="details-post mb-4">
-    <div class="col-12">
-      <pre class="content-text">{{movieDetails.content}}</pre>
+  <section class="location">
+    <div class="details-location col-12">
+      <p class="fs-6">✎ 作者 : {{movieDetails.author}} / 更新時間 : {{movieDetails.updateTime}}</p>
     </div>
   </section>
 
-  <section class="back">
+  <section class="details-post">
+    <div class="col-12">
+      <pre class="fs-6 content-text">{{movieDetails.content}}</pre>
+    </div>
+  </section>
+
+  <section class="button">
     <a [routerLink]="['/']">
-      <button class="goback">返回首頁</button>
+      <button class="btn btn-primary new-btn">返回首頁</button>
     </a>
   </section>
 </article>

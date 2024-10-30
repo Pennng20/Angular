@@ -15,8 +15,8 @@ import { Title } from '@angular/platform-browser';
 })
 export class DetailsComponent {
   /**
-   * @public 允許任何程式碼使用。
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
+   * @memberof DetailsComponent 內頁組件
    */
   private movieService = inject(MovieService);
   private route: ActivatedRoute = inject(ActivatedRoute);
@@ -31,13 +31,12 @@ export class DetailsComponent {
     content: ''
   };
   /**
-   * @get 獲取數據
-   * @set 接收的值必須是一個Moviepost的類型
+   * @type {Moviepost} 返回Moviepost的類型
    */
   public get movieDetails(): Moviepost {
     return this._movieDetails;
   }
-  public set movieDetails(value: Moviepost) {
+  private set movieDetails(value: Moviepost) {
     this._movieDetails = value;
   }
   /**
