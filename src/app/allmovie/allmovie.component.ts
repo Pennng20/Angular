@@ -102,6 +102,10 @@ export class AllmovieComponent {
     this.movieSearch = this.movieList.filter(
       Moviepost => Moviepost.name.includes(text)
     );
+
+    if (this.movieSearch.length === 0) {
+      alert('搜尋沒有結果');
+    }
   }
   /**void 表示onPageChange方法不會返回任何東西。
    * 更新currentPage為新的頁碼
