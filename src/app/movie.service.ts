@@ -20,7 +20,7 @@ export class MovieService {
   public async getMoviePostId(id: number): Promise<Moviepost> {
     const data:Response  = await fetch(`${this.url}/${id}`);
     return await data.json() ?? {
-      id: 1,
+      id: 0,
       name: '',
       focus: '',
       author: '',

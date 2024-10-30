@@ -76,10 +76,6 @@ export class AllmovieComponent {
     return this._currentPage;
   }
 
-  private scrollToTop(): void {
-    window.scrollTo({ top: 0 });
-  }
-
   public set currentPage(value: number) {
     this._currentPage = value;
   }
@@ -113,6 +109,10 @@ export class AllmovieComponent {
    */
   public onPageChange(newPage: number): void {
     this._currentPage = newPage;
+  }
+
+  private scrollToTop(): void {
+    window.scrollTo({ top: 0 });
   }
 }
 

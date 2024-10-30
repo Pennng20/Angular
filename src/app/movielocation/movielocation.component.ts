@@ -13,7 +13,7 @@ import { RouterModule } from '@angular/router';
 
 export class MovielocationComponent {
   @Input() moviePost: Moviepost = {
-    id: 1,
+    id: 0,
     name: '',
     focus: '',
     author: '',

@@ -1,12 +1,13 @@
-<section class="home-movie">
-  <div class="movie-group">
+<section class="home-movie py-2-5">
+  <div class="movie-group pb-3">
     <div class="text">
       <a [routerLink]="['/details', moviePost.id]">
-        <h3 class="fs-3">✎ 電影影評 | {{ moviePost.name }}</h3>
+        <h3 class="fs-3 fs-sm-6">✎&nbsp;電影影評&nbsp;|&nbsp;{{ moviePost.name }}</h3>
+        <!-- 空格也可以用span -->
       </a>
       <h3 class="fs-4">電影金句 :「{{moviePost.focus}}」</h3>
     </div>
-    <img class="movie-photo" [src]="moviePost.photo" alt="{{moviePost.name}}">
+    <img class="movie-photo radius" [src]="moviePost.photo" alt="{{moviePost.name}}">
   </div>
 
   <div class="location">

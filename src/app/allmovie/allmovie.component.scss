@@ -1,23 +1,8 @@
 .allmovie-title {
-  text-align: center;
-  margin: 80px 0 60px 0;
   color: var(--text-color);
 }
 
 ngb-pagination {
   display: flex;
   justify-content: center;
-  padding: 40px 0;
-}
-
-ngb-pagination .page-link {
-  padding: 8px 16px;
-}
-
-.allmovie-search {
-  padding-bottom: 50px;
-}
-
-form {
-  text-align: center;
 }

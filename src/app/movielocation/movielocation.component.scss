@@ -1,19 +1,16 @@
 .home-movie {
   max-width: 1200px;
   margin: auto;
-  padding: 10px 0;
 }
 
 .movie-photo {
   width: 200px;
   height: 130px;
-  border-radius: 20px;
 }
 
 .movie-group {
   display: grid;
   grid-template-columns: 1fr auto;
-  padding: 0 0 16px 0;
 }
 
 .fs-3 {

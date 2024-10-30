@@ -1,8 +1,8 @@
-<section class="allmovie-title">
+<section class="allmovie-title mt-7 mb-5 text-center">
   <h2>☾ 全部文章 ☽</h2>
 </section>
 
-<section class="allmovie-search">
+<section class="allmovie-search mb-5">
   <form>
     <input type="text" class="search-input" placeholder="請輸入電影名稱" #search>
     <button type="button" class="btn btn-primary new-btn" (click)="searchResults(search.value)">搜尋</button>
@@ -12,12 +12,12 @@
 <section class="allmovie-results">
   <div class="container">
     <div class="row">
-      <app-movielocation *ngFor="let movie of movieSearch| slice: (page-1) * pageSize : page * pageSize"
+      <app-movielocation *ngFor="let movie of movieSearch | slice: (page-1) * pageSize : page * pageSize"
         class="col-12 mb-4" [moviePost]="movie">
       </app-movielocation>
     </div>
   </div>
 </section>
 
-<ngb-pagination [(page)]="page" [pageSize]="pageSize" [collectionSize]="items"
+<ngb-pagination class="py-4" [(page)]="page" [pageSize]="pageSize" [collectionSize]="items"
   (pageChange)="onPageChange($event)"></ngb-pagination>/>

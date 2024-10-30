@@ -1,31 +1,25 @@
 article {
   max-width: 760px;
-  margin-top: 80px;
 }
 
 .movie-details {
   display: grid;
-  //第一個欄位的寬度為可用空間的1份，第二個欄位的寬度根據內容自動調整。
   grid-template-columns: 1fr auto;
 }
 
 .details-pic {
   display: flex;
   justify-content: center;
-  padding: 30px 0 0 0;
 
   img {
     width: 740px;
     height: 100%;
-    border-radius: 20px;
   }
 }
 
 .details-post {
   text-align: center;
-  font-size: 20px;
   line-height: 36px;
-  margin: 24px 0;
 
   pre {
     color: var(--text-color);
@@ -42,5 +36,4 @@ article {
 
 .location p {
   text-align: end;
-  margin-right: 10px;
 }
