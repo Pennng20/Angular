@@ -77,9 +77,6 @@ export class AllmovieComponent {
     return this._currentPage;
   }
 
-  public set currentPage(value: number) {
-    this._currentPage = value;
-  }
   /**
    * 方法調用回傳promise，.then接收回傳的結果
    * void 表示getMoviepost方法不會返回任何東西。

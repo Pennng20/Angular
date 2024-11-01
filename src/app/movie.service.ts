@@ -6,19 +6,19 @@ import { Moviepost } from "./moviepost";
 })
 
 export class MovieService {
-  private readonly url:string = 'http://localhost:3000/movies';
+  private readonly url: string = 'http://localhost:3000/movies';
   /**
    * @returns 回傳一個Moviepost[]類型的promise
    */
   public async getMoviePost(): Promise<Moviepost[]> {
-    const data:Response = await fetch(this.url);
+    const data: Response = await fetch(this.url);
     return await data.json() ?? [];
   }
   /**
    * @param id 參數，回傳的id要是數字型別的。
    */
   public async getMoviePostId(id: number): Promise<Moviepost> {
-    const data:Response  = await fetch(`${this.url}/${id}`);
+    const data: Response = await fetch(`${this.url}/${id}`);
     return await data.json() ?? {
       id: 0,
       name: '',

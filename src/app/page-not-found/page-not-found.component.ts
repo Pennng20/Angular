@@ -8,6 +8,4 @@ import { RouterModule } from '@angular/router';
   templateUrl: './page-not-found.component.html',
   styleUrl: './page-not-found.component.scss'
 })
-export class PageNotFoundComponent {
-
-}
+export class PageNotFoundComponent { }

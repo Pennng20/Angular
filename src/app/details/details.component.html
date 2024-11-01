@@ -6,17 +6,17 @@
     </div>
   </section>
 
-  <section class="details-pic mb-2 ml-4">
-    <img class="details-photo img-fluid radius" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
+  <section class="details-pic mb-2 ml-4 d-flex justify-content-center">
+    <img class="details-photo img-fluid rounded" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
   </section>
 
-  <section class="location">
+  <section class="location text-end">
     <div class="details-location col-12">
       <p class="fs-6">✎ 作者 : {{movieDetails.author}} / 更新時間 : {{movieDetails.updateTime}}</p>
     </div>
   </section>
 
-  <section class="details-post my-4 fs-3-5">
+  <section class="details-post my-4 fs-3-5 text-left lh-lg">
     <div class="col-12">
       <pre class="fs-6 content-text">{{movieDetails.content}}</pre>
     </div>

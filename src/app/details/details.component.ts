@@ -24,7 +24,7 @@ export class DetailsComponent {
   private titleService = inject(Title);
   private router: Router = inject(Router);
   private _movieDetails: Moviepost = {
-    id: 1,
+    id: 0,
     name: '',
     focus: '',
     author: '',

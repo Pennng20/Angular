@@ -8,9 +8,6 @@ article {
 }
 
 .details-pic {
-  display: flex;
-  justify-content: center;
-
   img {
     width: 740px;
     height: 100%;
@@ -18,22 +15,15 @@ article {
 }
 
 .details-post {
-  text-align: center;
-  line-height: 36px;
-
   pre {
     color: var(--text-color);
   }
 
   .content-text {
+    //只會影響段落的第一行
     //自動換行
     text-indent: 2em;
     white-space: pre-wrap;
     max-width: 800px;
-    text-align: left;
   }
-}
-
-.location p {
-  text-align: end;
 }
