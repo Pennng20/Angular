@@ -5,6 +5,7 @@ import { MovieService } from '../movie.service';
 import { Moviepost } from '../moviepost';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -21,6 +22,7 @@ export class DetailsComponent {
   private movieService = inject(MovieService);
   private route: ActivatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
+  private router: Router = inject(Router);
   private _movieDetails: Moviepost = {
     id: 1,
     name: '',
@@ -49,7 +51,9 @@ export class DetailsComponent {
     this.movieService.getMoviePostId(getMovielocationId).then(movieId => {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
-    })
+    }).catch(error => {
+      this.router.navigate(['/pagenotfind']);
+    });
   }
 }
 

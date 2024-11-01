@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MovieService } from '../movie.service';
 import { Moviepost } from '../moviepost';
 import { MovielocationComponent } from '../movielocation/movielocation.component';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -29,6 +29,7 @@ export class AllmovieComponent {
   private _movieList: Moviepost[] = [];
   private _movieSearch: Moviepost[] = [];
   private movieService: MovieService = inject(MovieService);
+  private router: Router = inject(Router);
   private _currentPage = 1; //當前頁碼
 
   /**
@@ -104,7 +105,12 @@ export class AllmovieComponent {
     );
 
     if (this.movieSearch.length === 0) {
-      alert('搜尋沒有結果');
+      alert('搜尋沒有結果，請重新搜尋。');
+      this.movieSearch = this.movieList;
+
+      setTimeout(() => {
+        this.router.navigate(['/allmovie']);
+      }, 0);
     }
   }
   /**void 表示onPageChange方法不會返回任何東西。
