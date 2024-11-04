@@ -52,6 +52,7 @@ export class DetailsComponent {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
     }).catch(error => {
+      console.error(error);
       this.router.navigate(['/pagenotfind']);
     });
   }

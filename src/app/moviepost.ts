@@ -1,4 +1,4 @@
-export interface Moviepost {
+export interface MoviePost {
   id: number;
   name: string;
   focus: string;

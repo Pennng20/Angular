@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Moviepost } from '../moviepost';
+import { MoviePost } from '../moviepost';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { RouterModule } from '@angular/router';
 })
 
 export class MovielocationComponent {
-  @Input() moviePost: Moviepost = {
+  @Input() moviePost: MoviePost = {
     id: 0,
     name: '',
     focus: '',
