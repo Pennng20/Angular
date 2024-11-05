@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovielocationComponent } from '../movielocation/movielocation.component';
 import { MovieService } from '../movie.service';
-import { Moviepost } from '../moviepost';
+import { MoviePost } from '../moviepost';
 import { RouterOutlet, RouterModule } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -21,7 +21,7 @@ export class HomeComponent {
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
    * @type {Moviepost[]} movieList變數要是Moviepost[]的類型，初始化為空陣列。
    */
-  private _movieList: Moviepost[] = [];
+  private _movieList: MoviePost[] = [];
   private movieService: MovieService = inject(MovieService);
 
   /**
@@ -32,11 +32,11 @@ export class HomeComponent {
     return this._images;
   }
 
-  public get movieList(): Moviepost[] {
+  public get movieList(): MoviePost[] {
     return this._movieList;
   }
 
-  private set movieList(value: Moviepost[]) {
+  private set movieList(value: MoviePost[]) {
     this._movieList = value;
   }
   /**
@@ -44,7 +44,7 @@ export class HomeComponent {
    * void 表示ngOnInit方法不會返回任何東西。
    */
   public ngOnInit(): void {
-    this.movieService.getMoviePost().then((movieList: Moviepost[]) => {
+    this.movieService.getMoviePost().then((movieList: MoviePost[]) => {
       this.movieList = movieList;
     });
   }

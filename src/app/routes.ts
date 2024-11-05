@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
-import { AllmovieComponent } from './allmovie/allmovie.component';
+import { MovieListComponent } from './allmovie/movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routeConfig: Routes = [
@@ -15,12 +15,12 @@ const routeConfig: Routes = [
     component: DetailsComponent,
   },
   {
-    path: 'allmovie',
-    component: AllmovieComponent,
+    path: 'movielist',
+    component: MovieListComponent,
     title: '全部電影'
   },
   {
-    path: 'pagenotfind',
+    path: 'pagenotfound',
     component: PageNotFoundComponent,
     title: '頁面不存在'
   }

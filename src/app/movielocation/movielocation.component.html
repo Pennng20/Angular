@@ -1,16 +1,18 @@
-<section class="home-movie py-2-5 m-auto">
-  <div class="movie-group pb-3">
-    <div class="text col-10">
+<section class="home-movie m-auto">
+  <div class="movie-group row">
+    <div class="col-sm-12">
       <a class="text-decoration-none" [routerLink]="['/details', moviePost.id]">
         <h3 class="fs-3 fs-sm-6">✎&nbsp;電影影評&nbsp;|&nbsp;{{ moviePost.name }}</h3>
       </a>
       <h3 class="fs-4">電影金句 :「{{moviePost.focus}}」</h3>
     </div>
-    <img class="movie-photo rounded col-2" [src]="moviePost.photo" alt="{{moviePost.name}}">
+    <div class="col-sm-12 my-2 text-center">
+      <img class="rounded" [src]="moviePost.photo" alt="{{moviePost.name}}">
+    </div>
   </div>
 
-  <div class="location d-flex justify-content-between">
-    <p class="fs-6">作者 : {{moviePost.author}}</p>
-    <p class="fs-6">更新時間 : {{moviePost.updateTime}}</p>
+  <div class="information mt-3">
+    <h4 class="fs-6">作者 : {{moviePost.author}}</h4>
+    <h4 class="fs-6">更新時間 : {{moviePost.updateTime}}</h4>
   </div>
 </section>

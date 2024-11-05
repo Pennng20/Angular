@@ -4,13 +4,19 @@
 }
 
 body {
-  background-color: black;
+  background-color: var(--background-color);
   font-family: 'Source Sans 3', sans-serif;
 }
 
 .page-link {
-  color: white;
-  background-color: black;
+  color: var(--text-color);
+  background-color: var(--background-color);
+}
+
+.active > .page-link, .page-link.active{
+  background-color: var(--primary-color);
+  border: 1px solid var(--border-color2);
+  color: var(--text-color2);
 }
 
 .banner {
@@ -21,6 +27,7 @@ body {
   --primary-color: #FFC940;
   --background-color: #000000;
   --text-color: #ffffff;
+  --text-color2: #000000;
   --border-color: #000000;
   --border-color2: #ffffff;
   --hover-color: #ffffff;
@@ -87,10 +94,6 @@ input[type="text"] {
 
 .mt-7 {
   margin-top: 80px;
-}
-
-.py-2-5 {
-  padding: 10px 0;
 }
 
 .m-2-5 {

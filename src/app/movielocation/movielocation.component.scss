@@ -1,9 +1,11 @@
 .home-movie {
   max-width: 1200px;
 }
-.movie-photo {
-  width: 200px;
-  height: 130px;
+
+img {
+  width: 220px;
+  height: 150px;
+  object-fit: cover;
 }
 
 .movie-group {
@@ -19,7 +21,15 @@
   color: var(--texthover-color);
 }
 
-.location {
+.information {
+  display: flex;
+  justify-content: space-between;
   color: var(--text-color);
   border-bottom: 1px solid var(--text-color);
+}
+
+@media(max-width: 768px) {
+  .movie-group {
+    display: block;
+  }
 }

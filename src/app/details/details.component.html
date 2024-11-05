@@ -1,17 +1,17 @@
 <article class="container mt-7" style="max-width: 760px">
   <section class="movie-details row">
-    <div class="details-title col-12">
+    <div class="col-12">
       <h2 class="fs-3">✎ 電影影評 | {{movieDetails.name}}</h2>
       <h2 class="fs-4">電影金句 :「{{movieDetails.focus}}」</h2>
     </div>
   </section>
 
   <section class="details-pic mb-2 ml-4 d-flex justify-content-center">
-    <img class="details-photo img-fluid rounded" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
+    <img class="img-fluid rounded" [src]="movieDetails.photo" alt="{{movieDetails.name}}">
   </section>
 
-  <section class="location text-end">
-    <div class="details-location col-12">
+  <section class="text-end">
+    <div class="col-12">
       <p class="fs-6">✎ 作者 : {{movieDetails.author}} / 更新時間 : {{movieDetails.updateTime}}</p>
     </div>
   </section>
@@ -24,7 +24,7 @@
 
   <section class="button">
     <a [routerLink]="['/']">
-      <button class="btn btn-primary new-btn">返回首頁</button>
+      <button class="btn btn-primary new-btn">返回上一篇</button>
     </a>
   </section>
 </article>

@@ -11,25 +11,22 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
   selector: 'app-allmovie',
   standalone: true,
   imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent, NgbPaginationModule, NgbCarouselModule],
-  templateUrl: './allmovie.component.html',
-  styleUrl: './allmovie.component.scss'
+  templateUrl: './movie-list.component.html',
+  styleUrl: './movie-list.component.scss'
 })
-export class AllmovieComponent {
+export class MovieListComponent {
   /**
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
    * @static 不需要創建實例(let myCar = new Car();) 可以直接通過類名來訪問。
    * @readonly 初始化後不能被修改。通常在構造函數中賦值，賦值後不能再次修改。適合用來定義不應該被意外修改的屬性。
    */
 
-  private static readonly PAGE_SIZE = 10;
-
-  private readonly page2: number = 0;
-
   private _movieList: MoviePost[] = [];
   private _movieSearch: MoviePost[] = [];
   private movieService: MovieService = inject(MovieService);
   private router: Router = inject(Router);
   private _currentPage = 1; //當前頁碼
+  private static readonly PAGE_SIZE = 10;
 
   /**
    * @get 不能有參數、且要有回傳值。
@@ -37,10 +34,8 @@ export class AllmovieComponent {
    * @type {string[]} 返回的類型要是物件陣列
    */
 
-  // private _page: number = AllmovieComponent.PAGE;
-
   public get pageSize(): number {
-    return AllmovieComponent.PAGE_SIZE;
+    return MovieListComponent.PAGE_SIZE;
   }
 
   private get movieList(): MoviePost[] {
@@ -82,7 +77,7 @@ export class AllmovieComponent {
    * 用來檢查電影名稱中是否有匹配的文字。
    * @param text 電影名稱
    */
-  public searchResults(text: string) {
+  public searchBtn(text: string) {
     if (!text) {
       this.movieSearch = this.movieList;
       return;
@@ -94,8 +89,8 @@ export class AllmovieComponent {
 
     if (this.movieSearch.length === 0) {
       alert('搜尋沒有結果，請重新搜尋。');
-      this.movieSearch = this.movieList;
-      this.router.navigate(['/allmovie']);
+      this.movieSearch = this._movieList;
+      this.router.navigate(['/movielist']);
     }
   }
   /**void 表示onPageChange方法不會返回任何東西。

@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { MovieService } from '../movie.service';
-import { Moviepost } from '../moviepost';
+import { MoviePost } from '../moviepost';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class DetailsComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
   private router: Router = inject(Router);
-  private _movieDetails: Moviepost = {
+  private _movieDetails: MoviePost = {
     id: 0,
     name: '',
     focus: '',
@@ -35,10 +35,10 @@ export class DetailsComponent {
   /**
    * @type {Moviepost} 返回Moviepost的類型
    */
-  public get movieDetails(): Moviepost {
+  public get movieDetails(): MoviePost {
     return this._movieDetails;
   }
-  private set movieDetails(value: Moviepost) {
+  private set movieDetails(value: MoviePost) {
     this._movieDetails = value;
   }
   /**
@@ -47,13 +47,13 @@ export class DetailsComponent {
    * 調用setTitle方法，會更新瀏覽器標籤中的標題。
    */
   public ngOnInit() {
-    const getMovielocationId: number = Number(this.route.snapshot.params['id']);
-    this.movieService.getMoviePostId(getMovielocationId).then(movieId => {
+    const getMovieId: number = Number(this.route.snapshot.params['id']);
+    this.movieService.getMoviePostId(getMovieId).then(movieId => {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
     }).catch(error => {
       console.error(error);
-      this.router.navigate(['/pagenotfind']);
+      this.router.navigate(['/pagenotfound']);
     });
   }
 }
