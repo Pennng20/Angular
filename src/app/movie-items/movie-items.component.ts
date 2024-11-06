@@ -7,11 +7,11 @@ import { RouterModule } from '@angular/router';
   selector: 'app-movielocation',
   standalone: true,
   imports: [CommonModule, RouterModule],
-  templateUrl: './movielocation.component.html',
-  styleUrl: './movielocation.component.scss'
+  templateUrl: './movie-items.component.html',
+  styleUrl: './movie-items.component.scss'
 })
 
-export class MovielocationComponent {
+export class MovieItemsComponent {
   @Input() moviePost: MoviePost = {
     id: 0,
     name: '',

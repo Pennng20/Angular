@@ -23,6 +23,7 @@ export class DetailsComponent {
   private route: ActivatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
   private router: Router = inject(Router);
+  private _currentId: number = 0;
   private _movieDetails: MoviePost = {
     id: 0,
     name: '',
@@ -41,13 +42,25 @@ export class DetailsComponent {
   private set movieDetails(value: MoviePost) {
     this._movieDetails = value;
   }
+  public get currentId(): number {
+    return this._currentId;
+  }
+  private set currentId(value: number) {
+    this._currentId = value;
+  }
   /**
    * 把變數轉換成數字，getMoviepostId方法帶入參數，.then回傳值給movieDetails。
    * setTitle()是Title服務提供的一個方法，用於設置當前頁面的標題。
    * 調用setTitle方法，會更新瀏覽器標籤中的標題。
+   * previousPage會返回上一篇文章
    */
   public ngOnInit() {
     const getMovieId: number = Number(this.route.snapshot.params['id']);
+    this.currentId = getMovieId;
+    this.previousPage(getMovieId);
+  }
+
+  private previousPage(getMovieId: number) {
     this.movieService.getMoviePostId(getMovieId).then(movieId => {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
@@ -56,5 +69,13 @@ export class DetailsComponent {
       this.router.navigate(['/pagenotfound']);
     });
   }
-}
 
+  public previousPageBtn() {
+    const previousId = this.currentId - 1;
+    this.router.navigate([`/details/${previousId}`]).then(() => {
+      window.scrollTo(0, 0);
+      this.previousPage(previousId); //重新加載當前資料
+      this.currentId = previousId; //currentId=當前id
+    });
+  }
+}

@@ -22,9 +22,7 @@
     </div>
   </section>
 
-  <section class="button">
-    <a [routerLink]="['/']">
-      <button class="btn btn-primary new-btn">返回上一篇</button>
-    </a>
+  <section class="button" *ngIf="currentId > 1">
+    <button class="btn btn-primary new-btn" (click)="previousPageBtn()">回到上一頁</button>
   </section>
 </article>

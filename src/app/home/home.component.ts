@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovielocationComponent } from '../movielocation/movielocation.component';
+import { MovieItemsComponent } from '../movie-items/movie-items.component';
 import { MovieService } from '../movie.service';
 import { MoviePost } from '../moviepost';
 import { RouterOutlet, RouterModule } from '@angular/router';
@@ -10,7 +10,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent, NgbCarouselModule],
+  imports: [RouterOutlet, RouterModule, CommonModule, MovieItemsComponent, NgbCarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

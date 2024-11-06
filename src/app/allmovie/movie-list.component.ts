@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieService } from '../movie.service';
 import { MoviePost } from '../moviepost';
-import { MovielocationComponent } from '../movielocation/movielocation.component';
+import { MovieItemsComponent } from '../movie-items/movie-items.component';
 import { RouterOutlet, RouterModule, Router } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
@@ -10,7 +10,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-allmovie',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, MovielocationComponent, NgbPaginationModule, NgbCarouselModule],
+  imports: [RouterOutlet, RouterModule, CommonModule, MovieItemsComponent, NgbPaginationModule, NgbCarouselModule],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })
@@ -77,7 +77,7 @@ export class MovieListComponent {
    * 用來檢查電影名稱中是否有匹配的文字。
    * @param text 電影名稱
    */
-  public searchBtn(text: string) {
+  public searchBtn(text: string, search: HTMLInputElement) {
     if (!text) {
       this.movieSearch = this.movieList;
       return;
@@ -92,6 +92,7 @@ export class MovieListComponent {
       this.movieSearch = this._movieList;
       this.router.navigate(['/movielist']);
     }
+    search.value = '';
   }
   /**void 表示onPageChange方法不會返回任何東西。
    * 更新currentPage為新的頁碼
