@@ -57,10 +57,10 @@ export class DetailsComponent {
   public ngOnInit() {
     const getMovieId: number = Number(this.route.snapshot.params['id']);
     this.currentId = getMovieId;
-    this.previousPage(getMovieId);
+    this.getMoviePostById(getMovieId);
   }
 
-  private previousPage(getMovieId: number) {
+  private getMoviePostById(getMovieId: number) {
     this.movieService.getMoviePostId(getMovieId).then(movieId => {
       this.movieDetails = movieId;
       this.titleService.setTitle(movieId.name);
@@ -71,11 +71,10 @@ export class DetailsComponent {
   }
 
   public previousPageBtn() {
-    const previousId = this.currentId - 1;
-    this.router.navigate([`/details/${previousId}`]).then(() => {
+    this.currentId = this.currentId - 1;
+    this.router.navigate([`/details/${this.currentId}`]).then(() => {
       window.scrollTo(0, 0);
-      this.previousPage(previousId); //重新加載當前資料
-      this.currentId = previousId; //currentId=當前id
+      this.getMoviePostById(this.currentId); //重新加載當前資料
     });
   }
 }
