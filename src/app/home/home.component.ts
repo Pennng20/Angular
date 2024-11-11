@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MovieItemsComponent } from '../movie-items/movie-items.component';
 import { MovieService } from '../movie.service';
 import { MoviePost } from '../moviepost';
-import { RouterOutlet, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, MovieItemsComponent, NgbCarouselModule],
+  imports: [RouterModule, CommonModule, MovieItemsComponent, NgbCarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

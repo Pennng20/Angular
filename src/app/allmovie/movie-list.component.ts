@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { MovieService } from '../movie.service';
 import { MoviePost } from '../moviepost';
 import { MovieItemsComponent } from '../movie-items/movie-items.component';
-import { RouterOutlet, RouterModule, Router } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-allmovie',
   standalone: true,
-  imports: [RouterOutlet, RouterModule, CommonModule, MovieItemsComponent, NgbPaginationModule, NgbCarouselModule],
+  imports: [RouterModule, CommonModule, MovieItemsComponent, NgbPaginationModule, NgbCarouselModule],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.scss'
 })
