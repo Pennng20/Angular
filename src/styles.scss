@@ -27,6 +27,7 @@ body {
 :root {
   --primary-color: #FFC940;
   --background-color: #000000;
+  --background-color2: #ffffff;
   --text-color: #ffffff;
   --text-color2: #000000;
   --border-color: #000000;
@@ -35,7 +36,12 @@ body {
   --texthover-color: #5bbbff;
 }
 
-input[type="text"] {
+.form-search {
+  display: flex;
+  justify-content: center;
+}
+
+.form-search input[type="text"] {
   background-color: var(--background-color);
   border: 1px solid var(--border-color2);
   border-radius: 20px;
@@ -43,6 +49,26 @@ input[type="text"] {
   padding: 4px 20px;
   margin-right: 10px;
   color: white;
+}
+
+.form-login input[type="text"] {
+  background-color: var(--background-color2);
+  border: 1px solid var(--border-color2);
+  border-radius: 20px;
+  width: 60%;
+  padding: 6px 24px;
+  color: var(--text-color2);
+  font-size: 14px;
+}
+
+.form-login input[type="email"] {
+  background-color: var(--background-color2);
+  border: 1px solid var(--border-color2);
+  border-radius: 20px;
+  width: 60%;
+  padding: 6px 24px;
+  color: var(--text-color2);
+  font-size: 14px;
 }
 
 .new-btn {
@@ -99,9 +125,4 @@ input[type="text"] {
 
 .m-2-5 {
   margin: 12px;
-}
-
-form {
-  display: flex;
-  justify-content: center;
 }

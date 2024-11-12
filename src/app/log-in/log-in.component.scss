@@ -1,0 +1,41 @@
+.login {
+  background-image: url('/assets/background.jpg');
+  background-size: cover;
+  background-position: center;
+  margin: 80px auto;
+  max-width: 800px;
+  height: 70vh;
+  display: grid;
+  border: 6px solid var(--border-color2);
+  border-radius: 20px;
+  align-items: center;
+}
+
+.login-text {
+  margin: auto ;
+  border-right: 2px solid var(--border-color2);
+
+  h3 {
+    color: var(--text-color);
+    line-height: 40px;
+  }
+}
+
+.form-login {
+  color: var(--text-color);
+
+  h3 {
+    color: var(--text-color);
+  }
+
+  label {
+    display: block;
+    margin: 16px auto 10px auto;
+  }
+}
+
+.button{
+  h3{
+    color: var(--text-color);
+  }
+}

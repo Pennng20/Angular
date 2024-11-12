@@ -1,0 +1,43 @@
+<section class="login text-center">
+  <div *ngIf="!username; else loggedInContent">
+    <div class="row">
+      <div class="login-text col-5">
+        <img class="mb-4" src="/assets/logo.svg" alt="logo">
+        <h3>立即登入&nbsp;!</h3>
+        <h3>開始撰寫影評吧&nbsp;!</h3>
+      </div>
+
+      <div class="form-login col-7" *ngIf="!loginError; else loggedInContent">
+        <h3>登入</h3>
+        <form [formGroup]="loginForm" (ngSubmit)="onLoginBtn()">
+          <label for="username">會員名稱</label>
+          <input id="username" type="text" formControlName="username" placeholder="請輸入會員名稱">
+
+          <label for="password">密碼</label>
+          <input id="password" type="text" formControlName="password" placeholder="請輸入8-15位數的數字及英文">
+
+          <label for="email">信箱</label>
+          <input id="email" type="email" formControlName="email" placeholder="請輸入信箱符合格式">
+
+          <div>
+            <button type="submit" class="btn btn-primary new-btn mt-4" [disabled]="loginForm.invalid">登入</button>
+          </div>
+        </form>
+
+        <div *ngIf="loginError" class="error-message">
+          <p>帳號或密碼錯誤</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loggedInContent>
+  <section class="button">
+    <div *ngIf="welcomeMessage">
+      <h3>歡迎回來，{{ username }}!</h3>
+      <h3>兩秒後將自動跳轉回首頁</h3>
+      <button class="btn btn-primary new-btn mt-4" (click)="onLogoutBtn()">登出</button>
+    </div>
+  </section>
+</ng-template>

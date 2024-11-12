@@ -1,9 +1,16 @@
-<section>
+<section class="header">
   <a [routerLink]="['/']">
-    <header>
-      <img class="home-logo m-2-5" src="/assets/logo.svg" alt="logo">
-    </header>
+    <img class="home-logo m-2-5" src="/assets/logo.svg" alt="logo">
   </a>
+
+    <ng-container *ngIf="isLoggedIn; else loggedOut">
+      <span>{{loggedInUser?.username}}</span>
+      <button (click)="onLogoutBtn()" class="btn btn-primary new-btn m-4">登出</button>
+    </ng-container>
+
+  <ng-template #loggedOut>
+    <a class="m-4" [routerLink]="['/login']">登入</a>
+  </ng-template>
 </section>
 
 <section class="content">
