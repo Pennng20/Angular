@@ -16,8 +16,8 @@ export class LogInService {
       this.userSubject.next(JSON.parse(user));
     }
   }
-  //登入
-  login(username: string, password: string, email: string) {
+
+  public login(username: string, password: string, email: string): boolean {
     const user = mockUsers.find(
       (u) => u.username === username && u.password === password && u.email === email
     );
@@ -25,21 +25,21 @@ export class LogInService {
       localStorage.setItem('user', JSON.stringify(user));
       this.userSubject.next(user);
       return true;
-    }else{
+    } else {
       return false;
     }
   }
-  //登出
-  logout() {
+
+  public logout(): void {
     localStorage.removeItem('user');
     this.userSubject.next(null);
   }
 
-  getUser(){
+  public getUser(): any {
     return this.userSubject.value;
   }
 
-  isLoggedIn(): boolean {
+  public isLoggedIn(): boolean {
     return this.userSubject.value !== null;
   }
 }

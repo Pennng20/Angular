@@ -6,11 +6,16 @@
   top: 0;
   left: 0;
   z-index: 1;
-  display: flex;
-  justify-content: space-between;
+  .header-group{
+    height: 70px;
+  }
 }
 
 a{
   color: var(--text-color);
   text-decoration: none;
+}
+
+span{
+  color: var(--text-color);
 }

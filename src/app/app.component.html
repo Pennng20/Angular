@@ -1,18 +1,21 @@
-<section class="header">
+<section class="header d-flex justify-content-between">
   <a [routerLink]="['/']">
     <img class="home-logo m-2-5" src="/assets/logo.svg" alt="logo">
   </a>
 
-    <ng-container *ngIf="isLoggedIn; else loggedOut">
-      <span>{{loggedInUser?.username}}</span>
-      <button (click)="onLogoutBtn()" class="btn btn-primary new-btn m-4">登出</button>
-    </ng-container>
+  <ng-container *ngIf="user$ | async as user; else login">
+    <div class="header-group">
+      <img class="m-2-5" [src]="user.picture" alt="logo">
+      <span>歡迎回來，{{ user.username }}&nbsp;!</span>
+      <button (click)="onLogoutBtn()" class="btn btn-primary new-btn m-2-5 mt-2 px-3">登出</button>
+    </div>
+  </ng-container>
 
-  <ng-template #loggedOut>
-    <a class="m-4" [routerLink]="['/login']">登入</a>
+  <ng-template #login>
+    <button (click)="router.navigate(['/login'])" class="btn btn-primary new-btn m-2-5 px-4">登入</button>
   </ng-template>
 </section>
 
-<section class="content">
+<section>
   <router-outlet></router-outlet>
 </section>

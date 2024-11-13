@@ -33,7 +33,7 @@ body {
   --border-color: #000000;
   --border-color2: #ffffff;
   --hover-color: #ffffff;
-  --texthover-color: #5bbbff;
+  --texthover-color: #77a4ff;
 }
 
 .form-search {
@@ -91,6 +91,12 @@ body {
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+}
+
+button:disabled, .btn:disabled {
+  background-color: #d6d6d6;
+  color: #666666;
+  border-color: #818181;
 }
 
 .fs-3 {

@@ -1,5 +1,20 @@
 export const mockUsers = [
-  { username: 'admin', password: '123456789', email: 'admin@gmail.com' },
-  { username: 'capybala', password: '123456789', email: 'capybala@gmail.com' },
-  { username: 'amy', password: '123456789', email: 'amy@gmail.com' },
+  {
+    username: 'Lucas',
+    password: '123456789',
+    email: 'lucas@gmail.com',
+    picture: '/assets/lucas.png'
+  },
+  {
+    username: 'Capybala',
+    password: '123456789',
+    email: 'capybala@gmail.com',
+    picture: '/assets/capybala.png'
+  },
+  {
+    username: 'Share',
+    password: '123456789',
+    email: 'share@gmail.com',
+    picture: '/assets/share.png'
+  }
 ];
