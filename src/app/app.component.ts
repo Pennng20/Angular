@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LogInService } from './login.service';
+import { LoginService } from './login.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,11 +17,11 @@ export class AppComponent {
 
   user$: Observable<{ username: string, picture: string }>;
 
-  constructor(private loginService: LogInService, public router: Router) {
+  constructor(private loginService: LoginService, public router: Router) {
     this.user$ = this.loginService.user$;
   }
 
-  public onLogoutBtn() {
+  public onClickLogoutBtn() {
     this.loginService.logout();
     this.router.navigate(['/login']);
   }

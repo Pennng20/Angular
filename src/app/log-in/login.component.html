@@ -1,3 +1,4 @@
+<!-- *ngIf 根據條件動態地添加或移除 DOM 元素 -->
 <section class="login text-center rounded">
   <div *ngIf="!username; else loggedInContent">
     <div class="row">
@@ -8,7 +9,7 @@
       </div>
 
       <div class="form-login col-lg-7 col-sm-12" *ngIf="!loginError; else loggedInContent">
-        <form [formGroup]="loginForm" (ngSubmit)="onLoginBtn()">
+        <form [formGroup]="loginForm" (ngSubmit)="onClickLoginBtn()">
           <label for="username">會員名稱</label>
           <input id="username" type="text" formControlName="username" placeholder="請輸入會員名稱">
 
@@ -22,7 +23,7 @@
             <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>
           </div>
         </form>
-
+        <!-- async會自動訂閱可觀察對象，並根據發出的值更新，並在組件銷毀時自動取消訂閱。 -->
         <div *ngIf="loginError$ | async" class="error-message">
           <p>登入失敗！請檢查用戶名、密碼和電子郵件。</p>
         </div>
@@ -32,10 +33,8 @@
 </section>
 
 <ng-template #loggedInContent>
-  <section class="button">
-    <div *ngIf="welcomeMessage">
-      <h3>歡迎回來~{{ username }}~</h3>
-      <h3>兩秒後將自動跳轉回首頁</h3>
-    </div>
-  </section>
+  <div class="loginsuccess" *ngIf="welcomeMessage">
+    <h3>歡迎回來~{{ username }}~</h3>
+    <h3>兩秒後將自動跳轉回首頁</h3>
+  </div>
 </ng-template>

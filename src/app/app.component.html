@@ -6,13 +6,13 @@
   <ng-container *ngIf="user$ | async as user; else login">
     <div class="header-group">
       <img class="m-2-5" [src]="user.picture" alt="logo">
-      <span>歡迎回來，{{ user.username }}&nbsp;!</span>
-      <button (click)="onLogoutBtn()" class="btn btn-primary new-btn m-2-5 mt-2 px-3">登出</button>
+      <span>{{ user.username }}</span>
+      <button (click)="onClickLogoutBtn()" class="btn btn-primary new-btn m-2-5 px-3">登出</button>
     </div>
   </ng-container>
 
   <ng-template #login>
-    <button (click)="router.navigate(['/login'])" class="btn btn-primary new-btn m-2-5 px-4">登入</button>
+    <button (click)="router.navigate(['/login'])" class="btn btn-primary new-btn m-2-5 px-3">登入</button>
   </ng-template>
 </section>
 

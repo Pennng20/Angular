@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { LogInService } from '../login.service';
+import { LoginService } from '../login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -10,10 +10,18 @@ import { BehaviorSubject } from 'rxjs';
   selector: 'app-log-in',
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './log-in.component.html',
-  styleUrl: './log-in.component.scss'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss'
 })
-export class LogInComponent {
+
+export class LoginComponent {
+  /**
+   * @private 設置為私人
+   * @type {FormGroup} loginForm返回的類型
+   * @memberof LoginComponent 登入邏輯
+   * @BehaviorSubject  loginError$ $結尾表示這是一個Observable(可觀察的非同步結果)物件
+   *                   loginError$是BehaviorSubject<boolean>的型別，初始值為false
+   */
   private _loginForm!: FormGroup;
   private _loginError: boolean = false;
   private _username: string = '';
@@ -36,8 +44,14 @@ export class LogInComponent {
     return this._welcomeMessage;
   }
 
+  /**
+   * @param loginService 注入service服務 登入邏輯
+   * @param fb 創建表單的服務，可快速創建 FormGroup、FormControl、驗證邏輯。創建表單_loginForm。
+   * @param router 路由導航
+   * @Validators 表單驗證
+   */
   constructor(
-    public loginService: LogInService,
+    public loginService: LoginService,
     private fb: FormBuilder,
     private router: Router
   ) {
@@ -47,14 +61,17 @@ export class LogInComponent {
       email: ['', [Validators.required, Validators.email]]
     });
   }
-
-  public onLoginBtn() {
-    console.log('Form valid:', this.loginForm.valid);
+  /**
+   * @onClickLoginBtn this.loginForm.valid 返回一個布林值，表示表單的所有欄位是否通過了驗證
+   * @onClickLogoutBtn 調用loginService.logout() 登出邏輯
+   * @next Subject 和 BehaviorSubject 提供用來發送新值的API。
+   */
+  public onClickLoginBtn(): void {
     if (this.loginForm.valid) {
+      //表單驗證
       const { username, password, email } = this.loginForm.value;
+      //調用login方法
       const success = this.loginService.login(username, password, email);
-      console.log('Login success:', success);
-
       if (success) {
         this.loginError$.next(false);
         this._username = username;
@@ -71,7 +88,7 @@ export class LogInComponent {
     }
   }
 
-  public onLogoutBtn() {
+  public onClickLogoutBtn(): void {
     this.loginService.logout();
     this._username = '';
     this._welcomeMessage = false;
