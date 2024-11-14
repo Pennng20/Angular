@@ -3,7 +3,8 @@ import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
 import { MovieListComponent } from './allmovie/movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { LoginComponent } from './log-in/login.component';
+import { LoginComponent } from './login/login.component';
+import { ArticleManagementComponent } from './article-management/article-management.component';
 
 const routeConfig: Routes = [
   {
@@ -29,6 +30,11 @@ const routeConfig: Routes = [
     path: 'login',
     component: LoginComponent,
     title: '登入'
+  },
+  {
+    path: 'articleManagement',
+    component: ArticleManagementComponent,
+    title: '文章管理'
   }
 ];
 

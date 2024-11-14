@@ -3,10 +3,13 @@
     <img class="home-logo m-2-5" src="/assets/logo.svg" alt="logo">
   </a>
 
-  <ng-container *ngIf="user$ | async as user; else login">
+  <ng-container *ngIf="getUser$() | async as user; else login">
     <div class="header-group">
       <img class="m-2-5" [src]="user.picture" alt="logo">
       <span>{{ user.username }}</span>
+      <a [routerLink]="['/articleManagement']">
+        <button class="btn btn-primary new-btn m-2-5 px-3">文章管理</button>
+      </a>
       <button (click)="onClickLogoutBtn()" class="btn btn-primary new-btn m-2-5 px-3">登出</button>
     </div>
   </ng-container>

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from './login.service';
 import { CommonModule } from '@angular/common';
@@ -14,14 +14,23 @@ import { Observable } from 'rxjs';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
+  /**
+   * @private user$私人
+   * @type {Observable<{ username: string, picture: string }>} Observable 發出的數據結構
+   */
+  private user$: Observable<{ username: string, picture: string }>;
+  private loginService: LoginService = inject(LoginService);
+  public router: Router = inject(Router);
 
-  user$: Observable<{ username: string, picture: string }>;
-
-  constructor(private loginService: LoginService, public router: Router) {
+  constructor() {
     this.user$ = this.loginService.user$;
   }
 
-  public onClickLogoutBtn() {
+  public getUser$(): Observable<{ username: string, picture: string }> {
+    return this.user$;
+  }
+
+  public onClickLogoutBtn(): void {
     this.loginService.logout();
     this.router.navigate(['/login']);
   }
