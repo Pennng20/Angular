@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { mockUsers } from "./mock-data";
+import { UserData } from "../interface/user-data";
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +11,7 @@ export class LoginService {
    * @private 變數userSubject要是BehaviorSubject<any>類別 初始值為null
    * @user$ 是一個 Observable，可以被外部組件或服務訂閱，當 userSubject 的值改變時，它會自動通知所有訂閱者。
    */
-  private userSubject = new BehaviorSubject<any>(null);
+  public userSubject = new BehaviorSubject<any>(null);
   public user$ = this.userSubject.asObservable();
 
   /**
@@ -28,14 +28,13 @@ export class LoginService {
   }
   /**
    * (u)函數的參數，它代表 mockUsers 陣列中的每一個元素。
-   * @param username 使用者名稱
    * @param password 使用者密碼
    * @param email 信箱
    * @returns true登入成功，false登錄失敗。
    */
-  public login(username: string, password: string, email: string): boolean {
-    const user = mockUsers.find(
-      (u) => u.username === username && u.password === password && u.email === email
+  public login(password: string, email: string): boolean {
+    const user = UserData.find(
+      (u) =>  u.password === password && u.email === email
     );
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));

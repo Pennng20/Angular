@@ -10,14 +10,11 @@
 
       <div class="form-login col-lg-7 col-sm-12" *ngIf="!loginError; else loggedInContent">
         <form [formGroup]="loginForm" (ngSubmit)="onClickLoginBtn()">
-          <label for="username">會員名稱</label>
-          <input id="username" type="text" formControlName="username" placeholder="請輸入會員名稱">
+          <label for="email">帳號</label>
+          <input id="email" type="text" formControlName="email" placeholder="請輸入信箱符合格式">
 
           <label for="password">密碼</label>
           <input id="password" type="text" formControlName="password" placeholder="請輸入8-15位數的數字及英文">
-
-          <label for="email">信箱</label>
-          <input id="email" type="email" formControlName="email" placeholder="請輸入信箱符合格式">
 
           <div class="button">
             <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>

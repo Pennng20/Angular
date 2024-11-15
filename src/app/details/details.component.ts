@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../movie.service';
-import { MoviePost } from '../moviepost';
+import { MovieService } from '../service/movie.service';
+import { MoviePost } from '../interface/moviepost';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';

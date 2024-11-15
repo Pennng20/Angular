@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieService } from '../movie.service';
-import { MoviePost } from '../moviepost';
+import { MovieService } from '../service/movie.service';
+import { MoviePost } from '../interface/moviepost';
 import { MovieItemsComponent } from '../movie-items/movie-items.component';
 import { RouterModule, Router } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';

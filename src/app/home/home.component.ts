@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MovieItemsComponent } from '../movie-items/movie-items.component';
-import { MovieService } from '../movie.service';
-import { MoviePost } from '../moviepost';
+import { MovieService } from '../service/movie.service';
+import { MoviePost } from '../interface/moviepost';
 import { RouterModule } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleService } from '../service/article.service';
 
 
 @Component({
@@ -23,6 +24,8 @@ export class HomeComponent {
    */
   private _movieList: MoviePost[] = [];
   private movieService: MovieService = inject(MovieService);
+  private articleService: ArticleService = inject(ArticleService)
+  private _movieData: MoviePost[] = [];
 
   /**
    * @readonly
@@ -39,14 +42,25 @@ export class HomeComponent {
   private set movieList(value: MoviePost[]) {
     this._movieList = value;
   }
+
+  public get movieData(): MoviePost[] {
+    return this._movieData;
+  }
+
+  private set movieData(value: MoviePost[]) {
+    this._movieData = value;
+  }
   /**
    * @getMoviepost 方法回傳promise，.then接收回傳的值是Moviepost[]類型並賦值。
    * void 表示ngOnInit方法不會返回任何東西。
    */
+  // public ngOnInit(): void {
+  //   this.movieService.getMoviePost().then((movieList: MoviePost[]) => {
+  //     this.movieList = movieList;
+  //   });
+  // }
   public ngOnInit(): void {
-    this.movieService.getMoviePost().then((movieList: MoviePost[]) => {
-      this.movieList = movieList;
-    });
+    this._movieData = this.articleService.getMovies();
   }
 }
 

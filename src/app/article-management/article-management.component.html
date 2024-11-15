@@ -3,42 +3,35 @@
     <li [ngbNavItem]="1">
       <button ngbNavLink>新增文章</button>
       <ng-template ngbNavContent>
-        <p>
-          Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth
-          master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-          keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat
-          salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.
-        </p>
+        <form [formGroup]="articleForm" class="form-article" (ngSubmit)="onSubmit()">
+          <label for="name">電影名稱</label>
+          <input id="name" type="text" formControlName="name" placeholder="請輸入電影名稱">
+
+          <label for="focus">電影金句</label>
+          <input id="focus" type="text" formControlName="focus" placeholder="請輸入最喜歡的電影名言/金句">
+
+          <label for="content">文章內容</label>
+          <textarea name="content" id="content" formControlName="content" placeholder="請輸入電影影評/電影心得"></textarea>
+
+          <label for="photo">上傳圖片</label>
+          <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片">
+
+          <div class="button">
+            <button type="submit" class="btn btn-primary new-btn my-4" [disabled]="articleForm.invalid">新增文章</button>
+          </div>
+        </form>
       </ng-template>
     </li>
     <li [ngbNavItem]="2">
       <button ngbNavLink>修改文章</button>
       <ng-template ngbNavContent>
-        <p>
-          Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko
-          farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts
-          ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar
-          helvetica VHS salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson
-          8-bit, sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-          stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
-        </p>
+
       </ng-template>
     </li>
     <li [ngbNavItem]="3">
       <button ngbNavLink>刪除文章</button>
       <ng-template ngbNavContent>
-        <p>
-          Sed commodo, leo at suscipit dictum, quam est porttitor sapien, eget sodales nibh elit id diam. Nulla
-          facilisi.
-          Donec egestas ligula vitae odio interdum aliquet. Duis lectus turpis, luctus eget tincidunt eu, congue et
-          odio.
-          Duis pharetra et nisl at faucibus. Quisque luctus pulvinar arcu, et molestie lectus ultrices et. Sed diam
-          urna,
-          egestas ut ipsum vel, volutpat volutpat neque. Praesent fringilla tortor arcu. Vivamus faucibus nisl enim, nec
-          tristique ipsum euismod facilisis. Morbi ut bibendum est, eu tincidunt odio. Orci varius natoque penatibus et
-          magnis dis parturient montes, nascetur ridiculus mus. Mauris aliquet odio ac lorem aliquet ultricies in eget
-          neque. Phasellus nec tortor vel tellus pulvinar feugiat.
-        </p>
+
       </ng-template>
     </li>
   </ul>

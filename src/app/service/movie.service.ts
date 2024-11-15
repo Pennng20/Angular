@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { MoviePost } from "./moviepost";
+import { MoviePost } from "../interface/moviepost";
 
 @Injectable({
   providedIn: 'root',

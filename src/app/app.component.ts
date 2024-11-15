@@ -1,6 +1,6 @@
 import { Component, inject, Inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LoginService } from './login.service';
+import { LoginService } from './service/login.service';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';

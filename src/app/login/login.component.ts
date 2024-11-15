@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LoginService } from '../login.service';
+import { LoginService } from '../service/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -60,7 +60,6 @@ export class LoginComponent {
   */
   private createLoginForm(): FormGroup {
     return this.fb.group({
-      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(15)]],
       email: ['', [Validators.required, Validators.email]]
     });
@@ -69,17 +68,13 @@ export class LoginComponent {
   public onClickLoginBtn(): void {
     if (this.loginForm.valid) {
       //表單驗證
-      const { username, password, email } = this.loginForm.value;
+      const { password, email } = this.loginForm.value;
       //調用login方法
-      const success = this.loginService.login(username, password, email);
+      const success = this.loginService.login(password, email);
       if (success) {
         this.loginError$.next(false);
-        this._userName = username;
         this._welcomeMessage = true;
-
-        setTimeout(() => {
-          this.router.navigate(['/']);
-        }, 3000);
+        this.router.navigate(['/']);
       } else {
         this.loginError$.next(true);
       }

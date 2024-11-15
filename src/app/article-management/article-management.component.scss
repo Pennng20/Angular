@@ -1,0 +1,44 @@
+.article {
+  max-width: 1000px;
+  margin: 76px auto 0 auto;
+}
+
+.form-article {
+  margin: 40px auto;
+  width: 100%;
+  max-width: 1000px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color3);
+  color: var(--text-color);
+
+  label {
+    display: block;
+    margin-bottom: 8px;
+  }
+
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 16px;
+    border: 1px solid var(--border-color3);
+    border-radius: 4px;
+  }
+
+  textarea {
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px;
+    border: 1px solid var(--border-color3);
+    background-color: var(--background-color);
+    border-radius: 4px;
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-color);
+  }
+}
+
+.button {
+  margin: 0;
+}
