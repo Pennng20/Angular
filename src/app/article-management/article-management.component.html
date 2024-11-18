@@ -14,7 +14,10 @@
           <textarea name="content" id="content" formControlName="content" placeholder="請輸入電影影評/電影心得"></textarea>
 
           <label for="photo">上傳圖片</label>
-          <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片">
+          <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片"
+            (change)="onClickFileSelectBtn($event)">
+
+          <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽">
 
           <div class="button">
             <button type="submit" class="btn btn-primary new-btn my-4" [disabled]="articleForm.invalid">新增文章</button>
@@ -25,7 +28,36 @@
     <li [ngbNavItem]="2">
       <button ngbNavLink>修改文章</button>
       <ng-template ngbNavContent>
+        <div *ngIf="movies.length > 0">
+          <label for="selectMovies">請選擇要修改的電影</label>
+          <div *ngFor="let movie of movies">
+            <input type="checkbox" [value]="movie.id" (change)="onMovieSelect(movie.id, $event)">
+            {{ movie.name }}
+          </div>
+          <div *ngIf="selectMovie.length === 1">
+            <form [formGroup]="articleForm" class="form-edit-article" (ngSubmit)="onClickEditSubmitBtn()">
+              <label for="editName">電影名稱</label>
+              <input id="editName" type="text" formControlName="name">
 
+              <label for="editFocus">電影金句</label>
+              <input id="editFocus" type="text" formControlName="focus">
+
+              <label for="editContent">文章内容</label>
+              <textarea id="editContent" formControlName="content"></textarea>
+
+              <label for="photo">上傳圖片</label>
+              <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片"
+                (change)="onClickFileSelectBtn($event)">
+
+              <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽">
+
+              <div class="button">
+                <button type="submit" class="btn btn-primary new-btn my-4"
+                  [disabled]="articleForm.invalid">修改文章</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </ng-template>
     </li>
     <li [ngbNavItem]="3">

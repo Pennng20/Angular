@@ -30,8 +30,42 @@ export class ArticleService {
     return [...this.movieData];
   }
 
+  public getMovieById(id: number): MoviePost | undefined {
+    return this.movieData.find(movie => movie.id === id);
+  }
+
+  //新增
   public addMovie(newMovie: MoviePost): void {
     this.movieData.push(newMovie);
+    localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
+  }
+
+  //修改
+  public putMovie(updatedMovie: MoviePost): void {
+    const index = this.movieData.findIndex(movie => movie.id === updatedMovie.id);
+
+    if (index !== -1) {
+      this.movieData.splice(index, 1, updatedMovie);  // 在找到的索引處移除1個元素，插入新的updatedMovie
+      this.saveToLocalStorage();
+    } else {
+      console.error('Movie not found');
+    }
+  }
+
+  //刪除
+  public deleteMovie(id: number): void {
+    const index = this.movieData.findIndex(movie => movie.id === id);
+
+    if (index !== -1) {
+      this.movieData.splice(index, 1);
+      this.saveToLocalStorage();
+    } else {
+      console.error('Movie not found');
+    }
+  }
+
+  // 保存到 localStorage
+  private saveToLocalStorage(): void {
     localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
   }
 }

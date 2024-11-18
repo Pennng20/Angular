@@ -1,7 +1,8 @@
+// import { MovieService } from '../service/movie.service';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { MovieService } from '../service/movie.service';
+import { ArticleService } from '../service/article.service';
 import { MoviePost } from '../interface/moviepost';
 import { RouterModule } from '@angular/router';
 import { Title } from '@angular/platform-browser';
@@ -19,7 +20,7 @@ export class DetailsComponent {
    * @private 只能在該類別的內部被訪問，外部無法直接存取。
    * @memberof DetailsComponent 內頁組件
    */
-  private movieService = inject(MovieService);
+  private articleService: ArticleService = inject(ArticleService)
   private route: ActivatedRoute = inject(ActivatedRoute);
   private titleService = inject(Title);
   private router: Router = inject(Router);
@@ -61,13 +62,13 @@ export class DetailsComponent {
   }
 
   private getMoviePostById(getMovieId: number) {
-    this.movieService.getMoviePostId(getMovieId).then(movieId => {
-      this.movieDetails = movieId;
-      this.titleService.setTitle(movieId.name);
-    }).catch(error => {
-      console.error(error);
+    const movie = this.articleService.getMovieById(getMovieId);
+    if (movie) {
+      this.movieDetails = movie;
+      this.titleService.setTitle(movie.name);
+    } else {
       this.router.navigate(['/pagenotfound']);
-    });
+    }
   }
 
   public previousPageBtn() {

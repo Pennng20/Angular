@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { DetailsComponent } from './details/details.component';
-import { MovieListComponent } from './allmovie/movie-list.component';
+import { MovieListComponent } from './movielist/movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { ArticleManagementComponent } from './article-management/article-management.component';

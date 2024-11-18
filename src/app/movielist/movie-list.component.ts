@@ -1,11 +1,12 @@
+// import { MovieService } from '../service/movie.service';
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieService } from '../service/movie.service';
 import { MoviePost } from '../interface/moviepost';
 import { MovieItemsComponent } from '../movie-items/movie-items.component';
 import { RouterModule, Router } from '@angular/router';
 import { NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { ArticleService } from '../service/article.service';
 
 @Component({
   selector: 'app-allmovie',
@@ -21,9 +22,11 @@ export class MovieListComponent {
    * @readonly 初始化後不能被修改。通常在構造函數中賦值，賦值後不能再次修改。適合用來定義不應該被意外修改的屬性。
    */
 
-  private _movieList: MoviePost[] = [];
+  // private movieService: MovieService = inject(MovieService);
+  // private _movieList: MoviePost[] = [];
+  private articleService: ArticleService = inject(ArticleService)
+  private _movieData: MoviePost[] = [];
   private _movieSearch: MoviePost[] = [];
-  private movieService: MovieService = inject(MovieService);
   private router: Router = inject(Router);
   private _currentPage = 1; //當前頁碼
   private static readonly PAGE_SIZE = 10;
@@ -38,12 +41,20 @@ export class MovieListComponent {
     return MovieListComponent.PAGE_SIZE;
   }
 
-  private get movieList(): MoviePost[] {
-    return this._movieList;
+  // private get movieList(): MoviePost[] {
+  //   return this._movieList;
+  // }
+
+  // private set movieList(value: MoviePost[]) {
+  //   this._movieList = value;
+  // }
+
+  public get movieData(): MoviePost[] {
+    return this._movieData;
   }
 
-  private set movieList(value: MoviePost[]) {
-    this._movieList = value;
+  private set movieData(value: MoviePost[]) {
+    this._movieData = value;
   }
 
   public get movieSearch(): MoviePost[] {
@@ -68,10 +79,8 @@ export class MovieListComponent {
    * void 表示getMoviepost方法不會返回任何東西。
    */
   public ngOnInit(): void {
-    this.movieService.getMoviePost().then((movielist: MoviePost[]) => {
-      this.movieList = movielist;
-      this.movieSearch = movielist;
-    });
+    this._movieData = this.articleService.getMovies();
+    this.movieSearch = this._movieData;
   }
   /**
    * 用來檢查電影名稱中是否有匹配的文字。
@@ -79,17 +88,17 @@ export class MovieListComponent {
    */
   public searchBtn(text: string, search: HTMLInputElement) {
     if (!text) {
-      this.movieSearch = this.movieList;
+      this.movieSearch = this.movieData;
       return;
     }
 
-    this.movieSearch = this.movieList.filter(
+    this.movieSearch = this.movieData.filter(
       Moviepost => Moviepost.name.includes(text)
     );
 
     if (this.movieSearch.length === 0) {
       alert('搜尋沒有結果，請重新搜尋。');
-      this.movieSearch = this._movieList;
+      this.movieSearch = this._movieData;
       this.router.navigate(['/movielist']);
     }
     search.value = '';
