@@ -9,11 +9,21 @@
   z-index: 1;
 }
 
-a{
+a {
   color: var(--text-color);
   text-decoration: none;
 }
 
-span{
+span {
   color: var(--text-color);
+}
+
+@media screen and (max-width:768px) {
+  .articlebtn {
+    font-size: 14px;
+  }
+
+  .headerlogo{
+    display: none;
+  }
 }

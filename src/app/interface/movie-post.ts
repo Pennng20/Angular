@@ -1,6 +1,4 @@
-import { MoviePost } from "./moviepost"
-
-export const MovieData: MoviePost[] = [
+export const MoviePost= [
   {
     id: 1,
     name: "真愛繞圈圈",
@@ -219,7 +217,7 @@ export const MovieData: MoviePost[] = [
   },
   {
     id: 25,
-    name: "✎ 電影影評 | 小姐好白",
+    name: "小姐好白",
     focus: "這不只是一個包包，是Prada！",
     author: "尼哥",
     photo: "/assets/25.jpg",

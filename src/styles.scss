@@ -138,3 +138,7 @@ button:disabled,
 .nav-tabs .nav-link {
   color: var(--text-color);
 }
+
+.tab-content > .active {
+  padding: 0 16px;
+}

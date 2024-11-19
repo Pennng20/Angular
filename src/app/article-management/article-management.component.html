@@ -14,10 +14,9 @@
           <textarea name="content" id="content" formControlName="content" placeholder="請輸入電影影評/電影心得"></textarea>
 
           <label for="photo">上傳圖片</label>
-          <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片"
-            (change)="onClickFileSelectBtn($event)">
+          <input id="photo" type="file" (change)="onClickFileSelectBtn($event)">
 
-          <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽">
+          <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
 
           <div class="button">
             <button type="submit" class="btn btn-primary new-btn my-4" [disabled]="articleForm.invalid">新增文章</button>
@@ -25,45 +24,62 @@
         </form>
       </ng-template>
     </li>
+
     <li [ngbNavItem]="2">
       <button ngbNavLink>修改文章</button>
       <ng-template ngbNavContent>
         <div *ngIf="movies.length > 0">
-          <label for="selectMovies">請選擇要修改的電影</label>
-          <div *ngFor="let movie of movies">
-            <input type="checkbox" [value]="movie.id" (change)="onMovieSelect(movie.id, $event)">
-            {{ movie.name }}
+          <div class="container">
+            <label class="select" for="selectMovies">請選擇要修改的電影</label>
+            <select id="selectMovies" (change)="onMovieSelect($event)">
+              <option value="">請選擇要修改的電影</option>
+              <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}</option>
+            </select>
           </div>
-          <div *ngIf="selectMovie.length === 1">
-            <form [formGroup]="articleForm" class="form-edit-article" (ngSubmit)="onClickEditSubmitBtn()">
-              <label for="editName">電影名稱</label>
-              <input id="editName" type="text" formControlName="name">
 
-              <label for="editFocus">電影金句</label>
-              <input id="editFocus" type="text" formControlName="focus">
+          <form *ngIf="selectedMovieId" [formGroup]="articleForm" class="form-edit-article" (ngSubmit)="onEditSubmit()">
+            <label for="editName">電影名稱</label>
+            <input id="editName" type="text" formControlName="name">
 
-              <label for="editContent">文章内容</label>
-              <textarea id="editContent" formControlName="content"></textarea>
+            <label for="editFocus">電影金句</label>
+            <input id="editFocus" type="text" formControlName="focus">
 
-              <label for="photo">上傳圖片</label>
-              <input id="photo" type="file" formControlName="photo" placeholder="瀏覽圖片"
-                (change)="onClickFileSelectBtn($event)">
+            <label for="editContent">文章内容</label>
+            <textarea id="editContent" formControlName="content"></textarea>
 
-              <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽">
+            <label for="editPhoto">上傳圖片</label>
+            <input id="editPhoto" type="file" (change)="onClickFileSelectBtn($event)">
 
-              <div class="button">
-                <button type="submit" class="btn btn-primary new-btn my-4"
-                  [disabled]="articleForm.invalid">修改文章</button>
-              </div>
-            </form>
-          </div>
+            <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
+
+            <div class="button">
+              <button type="submit" class="btn btn-primary edit-btn my-4" [disabled]="articleForm.invalid">修改文章</button>
+            </div>
+          </form>
         </div>
       </ng-template>
     </li>
+
     <li [ngbNavItem]="3">
       <button ngbNavLink>刪除文章</button>
       <ng-template ngbNavContent>
-
+        <div *ngIf="movies.length > 0" class="delete-section">
+          <h3>請選擇要刪除的文章</h3>
+          <div class="movie-list">
+            <div *ngFor="let movie of movies" class="movie-item">
+              <div class="movie-info">
+                <h4>{{ movie.name }}</h4>
+                <p>{{ movie.focus }}</p>
+                <p class="author">作者：{{ movie.author }}</p>
+                <p class="updatetime">更新時間：{{ movie.updateTime }}</p>
+              </div>
+              <button class="btn btn-danger" (click)="onDeleteSelected(movie.id)">刪除</button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="movies.length === 0" class="no-movies">
+          目前沒有任何文章
+        </div>
       </ng-template>
     </li>
   </ul>

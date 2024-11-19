@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { MoviePost } from '../interface/moviepost';
-import { MovieData } from '../interface/movie-data';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +10,7 @@ export class ArticleService {
    * @type {string} 字串
    */
   private savekey: string = 'movieData';
-  private movieData: MoviePost[] = MovieData;
+  private movieData: MoviePost[] = [];
 
   /**
    * 檢查瀏覽器是否已存在電影數據，如果有則解析數據賦值給movieData
@@ -47,8 +46,6 @@ export class ArticleService {
     if (index !== -1) {
       this.movieData.splice(index, 1, updatedMovie);  // 在找到的索引處移除1個元素，插入新的updatedMovie
       this.saveToLocalStorage();
-    } else {
-      console.error('Movie not found');
     }
   }
 
@@ -59,8 +56,6 @@ export class ArticleService {
     if (index !== -1) {
       this.movieData.splice(index, 1);
       this.saveToLocalStorage();
-    } else {
-      console.error('Movie not found');
     }
   }
 

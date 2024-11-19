@@ -49,12 +49,4 @@ export class LoginService {
     localStorage.removeItem('user');
     this.userSubject.next(null);
   }
-  // //獲取資料
-  // public getUser(): any {
-  //   return this.userSubject.value;
-  // }
-  // //檢查使用者是否登錄
-  // public isLoggedIn(): boolean {
-  //   return this.userSubject.value !== null;
-  // }
 }
