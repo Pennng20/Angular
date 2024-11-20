@@ -17,6 +17,7 @@ export class MovieItemsComponent {
     name: '',
     focus: '',
     author: '',
+    userId: 0,
     photo: '',
     updateTime: '',
     content: ''

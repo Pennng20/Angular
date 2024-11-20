@@ -34,11 +34,12 @@ export class LoginService {
    */
   public login(password: string, email: string): boolean {
     const user = UserData.find(
-      (u) =>  u.password === password && u.email === email
+      (u) => u.password === password && u.email === email
     );
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
       this.userSubject.next(user);
+      console.log('User logged in:', user);
       return true;
     } else {
       return false;
@@ -48,5 +49,15 @@ export class LoginService {
   public logout(): void {
     localStorage.removeItem('user');
     this.userSubject.next(null);
+  }
+  public userManage(postId: number, postAuthorId: number): boolean {
+    const user = this.userSubject.value;
+    if (!user) return false;
+
+    // 檢查用戶是否是該文章的作者
+    if (user.id === postAuthorId) {
+      return true;
+    }
+    return false;
   }
 }

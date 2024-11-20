@@ -19,5 +19,12 @@ export const UserData = [
     password: '123456789',
     email: 'share@gmail.com',
     picture: '/assets/share.png'
+  },
+  {
+    id: 4,
+    username: 'Orangeprofessor',
+    password: '123456789',
+    email: 'orangejam@gmail.com',
+    picture: '/assets/orangejam.png'
   }
-];
+]

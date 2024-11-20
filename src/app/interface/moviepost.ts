@@ -3,6 +3,7 @@ export interface MoviePost {
   name: string;
   focus: string;
   author: string;
+  userId: number;
   photo: string;
   updateTime: string;
   content: string;

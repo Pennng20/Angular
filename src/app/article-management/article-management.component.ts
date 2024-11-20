@@ -6,6 +6,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MoviePost } from '../interface/moviepost';
 import { LoginService } from '../service/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-article-management',
@@ -22,6 +23,7 @@ export class ArticleManagementComponent implements OnInit {
   private articleService: ArticleService = inject(ArticleService);
   private loginService: LoginService = inject(LoginService);
   public imageBase64: string | null = null;
+  public router: Router = inject(Router);
 
   public get active(): number {
     return this._active;
@@ -119,6 +121,7 @@ export class ArticleManagementComponent implements OnInit {
         name: formValue.name,
         focus: formValue.focus,
         author: authorName,
+        userId: formValue.userId,
         photo: formValue.photo,
         updateTime: new Date().toLocaleString(),
         content: formValue.content
@@ -136,26 +139,41 @@ export class ArticleManagementComponent implements OnInit {
       const movieToUpdate = this.articleService.getMovieById(this._selectedMovieId);
 
       if (movieToUpdate) {
-        const updatedMovie: MoviePost = {
-          ...movieToUpdate,
-          name: formValue.name,
-          focus: formValue.focus,
-          content: formValue.content,
-          photo: formValue.photo,
-          updateTime: new Date().toLocaleString()
-        };
+        if (this.isMovieAuthor(movieToUpdate)) {
+          const updatedMovie: MoviePost = {
+            ...movieToUpdate,
+            name: formValue.name,
+            focus: formValue.focus,
+            content: formValue.content,
+            photo: formValue.photo,
+            updateTime: new Date().toLocaleString()
+          };
 
-        this.articleService.putMovie(updatedMovie);
-        this.loadMovies();
-        this.resetForm();
+          this.articleService.putMovie(updatedMovie);
+          this.loadMovies();
+          this.resetForm();
+        } else {
+          alert('您無權修改此文章')
+        }
       }
     }
   }
   //刪除文章
   public onDeleteSelected(movieId: number): void {
-    if (confirm('確定要刪除這篇文章嗎？')) {
-      this.articleService.deleteMovie(movieId);
-      this.loadMovies();
+    const movieToDelete = this.articleService.getMovieById(movieId);
+    if (movieToDelete && this.isMovieAuthor(movieToDelete)) {
+      if (confirm('確定要刪除這篇文章嗎？')) {
+        this.articleService.deleteMovie(movieId);
+        this.loadMovies();
+        this.router.navigate(['/']);
+      }
+    } else {
+      alert('您無權刪除此文章')
     }
+  }
+
+  private isMovieAuthor(movie: MoviePost): boolean {
+    const user = this.currentUser;
+    return user && movie.userId === user.id;
   }
 }

@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MoviePost } from '../interface/moviepost';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -11,15 +13,17 @@ export class ArticleService {
    */
   private savekey: string = 'movieData';
   private movieData: MoviePost[] = [];
+  public router: Router = inject(Router);
 
   /**
    * 檢查瀏覽器是否已存在電影數據，如果有則解析數據賦值給movieData
    */
-  constructor() {
+  constructor(private loginService: LoginService) {
     const saveMovies = localStorage.getItem(this.savekey);
     if (saveMovies) {
       this.movieData = JSON.parse(saveMovies);
-    }
+    };
+    localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
   }
   /**
    * @returns 淺拷貝，返回所有電影清單
@@ -35,27 +39,49 @@ export class ArticleService {
 
   //新增
   public addMovie(newMovie: MoviePost): void {
-    this.movieData.push(newMovie);
-    localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
+    const user = this.loginService.userSubject.value;
+    if (user) {
+      newMovie.author = user.username;
+      newMovie.userId = user.id;
+      this.movieData.push(newMovie);
+      this.saveToLocalStorage();
+      alert('新增成功');
+      this.router.navigate(['/']);
+    }
   }
 
   //修改
   public putMovie(updatedMovie: MoviePost): void {
-    const index = this.movieData.findIndex(movie => movie.id === updatedMovie.id);
+    const user = this.loginService.userSubject.value;
 
-    if (index !== -1) {
-      this.movieData.splice(index, 1, updatedMovie);  // 在找到的索引處移除1個元素，插入新的updatedMovie
+    const movieIndex = this.movieData.findIndex(movie => movie.id === updatedMovie.id);
+    if (movieIndex === -1) {
+      alert('找不到該文章');
+      return;
+    }
+
+    const movie = this.movieData[movieIndex];
+    if (movie.userId === user.id) {
+      this.movieData.splice(movieIndex, 1, updatedMovie);  // 先刪除該索引的電影，再插入新的 updatedMovie
       this.saveToLocalStorage();
+      alert('修改成功');
+      this.router.navigate(['/']);
+    } else {
+      alert('您無權修改此文章');
     }
   }
 
+
   //刪除
   public deleteMovie(id: number): void {
-    const index = this.movieData.findIndex(movie => movie.id === id);
+    const user = this.loginService.userSubject.value;
 
-    if (index !== -1) {
-      this.movieData.splice(index, 1);
+    const movie = this.movieData.find(movie => movie.id === id);
+    if (movie?.userId === user.id) {
+      this.movieData = this.movieData.filter(movie => movie.id !== id);
       this.saveToLocalStorage();
+    } else {
+      alert('您無權刪除此文章');
     }
   }
 

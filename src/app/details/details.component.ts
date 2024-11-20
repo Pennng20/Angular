@@ -30,6 +30,7 @@ export class DetailsComponent {
     name: '',
     focus: '',
     author: '',
+    userId: 0,
     photo: '',
     updateTime: '',
     content: ''
