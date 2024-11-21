@@ -13,12 +13,13 @@ export class ArticleService {
    */
   private savekey: string = 'movieData';
   private movieData: MoviePost[] = [];
-  public router: Router = inject(Router);
+  private router: Router = inject(Router);
+  private loginService: LoginService = inject(LoginService);
 
   /**
    * 檢查瀏覽器是否已存在電影數據，如果有則解析數據賦值給movieData
    */
-  constructor(private loginService: LoginService) {
+  constructor() {
     const saveMovies = localStorage.getItem(this.savekey);
     if (saveMovies) {
       this.movieData = JSON.parse(saveMovies);
