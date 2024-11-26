@@ -5,3 +5,9 @@ export interface UserData {
   email: string;
   picture: string;
 }
+
+export interface TempUserData {
+  id: number;
+  username: string;
+  picture: string;
+}

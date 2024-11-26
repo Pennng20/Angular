@@ -15,19 +15,18 @@ import { Observable } from 'rxjs';
 })
 export class AppComponent {
   /**
-   * @private user$私人
    * @type {Observable<{ username: string, picture: string }>} Observable 發出的數據結構
    */
-  private user$: Observable<{ username: string, picture: string }>;
+  private userObserver: Observable<{ username: string, picture: string }>;
   private loginService: LoginService = inject(LoginService);
   public router: Router = inject(Router);
 
   constructor() {
-    this.user$ = this.loginService.user$;
+    this.userObserver = this.loginService.userSubject$;
   }
 
   public getUser$(): Observable<{ username: string, picture: string }> {
-    return this.user$;
+    return this.userObserver;
   }
 
   public onClickLogoutBtn(): void {

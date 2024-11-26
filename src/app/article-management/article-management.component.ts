@@ -15,15 +15,18 @@ import { Router } from '@angular/router';
   templateUrl: './article-management.component.html',
   styleUrl: './article-management.component.scss'
 })
-export class ArticleManagementComponent implements OnInit {
+export class ArticleManagementComponent {
+  /**
+   * @private 只能在該類別的內部被訪問，外部無法直接存取。
+   */
   private _active = 1;
   private _articleForm: FormGroup;
   private _movies: MoviePost[] = [];
   private _selectedMovieId: number | null = null;
-  public imageBase64: string | null = null;
+  private _imageBase64: string | null = null;
   private articleService: ArticleService = inject(ArticleService);
   private loginService: LoginService = inject(LoginService);
-  public router: Router = inject(Router);
+  private router: Router = inject(Router);
 
   public get active(): number {
     return this._active;
@@ -46,8 +49,12 @@ export class ArticleManagementComponent implements OnInit {
     return this._selectedMovieId;
   }
 
+  public get imageBase64(): string | null {
+    return this._imageBase64;
+  }
+
   private get currentUser(): any {
-    return this.loginService.userSubject.value;
+    return this.loginService.userSubject$.value;
   }
   /**
    * FormGroup
@@ -56,8 +63,8 @@ export class ArticleManagementComponent implements OnInit {
   constructor(private fb: FormBuilder) {
     // 確保在建構函數中初始化表單，設定各欄位的驗證規則
     this._articleForm = this.fb.group({
-      name: ['', [Validators.required, Validators.maxLength(100)]],
-      focus: ['', [Validators.required, Validators.maxLength(255)]],
+      name: ['', [Validators.required, Validators.maxLength(20)]],
+      focus: ['', [Validators.required, Validators.maxLength(22)]],
       content: ['', Validators.required],
       photo: [null, Validators.required]
     });
@@ -72,7 +79,7 @@ export class ArticleManagementComponent implements OnInit {
 
   private resetForm(): void {
     this._articleForm.reset();
-    this.imageBase64 = null;
+    this._imageBase64 = null;
     this._selectedMovieId = null;
   }
   /**
@@ -87,7 +94,7 @@ export class ArticleManagementComponent implements OnInit {
       const file = input.files[0];
       const reader = new FileReader();
       reader.onload = () => {
-        this.imageBase64 = reader.result as string;
+        this._imageBase64 = reader.result as string;
         this.articleForm.patchValue({ photo: this.imageBase64 });
       };
       reader.readAsDataURL(file);
@@ -106,7 +113,7 @@ export class ArticleManagementComponent implements OnInit {
 
     // + 將字符串轉換為數字
     // if movieId 無效，重置表單並返回
-    const movieId = +target.value;
+    const movieId = +target.value; //number
     if (!movieId) {
       this.resetForm();
       return;
@@ -122,7 +129,7 @@ export class ArticleManagementComponent implements OnInit {
         content: selectedMovie.content,
         photo: selectedMovie.photo
       });
-      this.imageBase64 = selectedMovie.photo;
+      this._imageBase64 = selectedMovie.photo;
     }
   }
   /**
@@ -132,7 +139,8 @@ export class ArticleManagementComponent implements OnInit {
   public onSubmit(): void {
     if (this.articleForm.valid) {
       const formValue = this.articleForm.value;
-      const authorName = this.currentUser?.username || 'Anonymous';
+      //從當前用戶的資料中獲取 username，如用戶不存在使用預設值 Anonymous
+      const authorName = this.currentUser?.username || 'Anonymous'; //提示用戶不存在' 不用用預設值
 
       const newMovie: MoviePost = {
         id: this.movies.length + 1,
@@ -157,7 +165,7 @@ export class ArticleManagementComponent implements OnInit {
    * ...movieToUpdate，將 movieToUpdate 的屬性複製到 updatedMovie 中
    */
   public onEditSubmit(): void {
-    if (this.articleForm.valid && this._selectedMovieId) {
+    if ((this.articleForm.valid) && (this._selectedMovieId)) {
       const formValue = this.articleForm.value;
       // 根據選中的電影 ID，獲取要更新的電影資料
       const movieToUpdate = this.articleService.getMovieById(this._selectedMovieId);
@@ -166,7 +174,8 @@ export class ArticleManagementComponent implements OnInit {
         // 如果電影存在，檢查當前用戶是否為電影作者
         if (this.isMovieAuthor(movieToUpdate)) {
           const updatedMovie: MoviePost = {
-            ...movieToUpdate, // 淺拷貝原始電影資料
+            // 淺拷貝原始電影資料
+            ...movieToUpdate,
             name: formValue.name,
             focus: formValue.focus,
             content: formValue.content,
@@ -194,10 +203,10 @@ export class ArticleManagementComponent implements OnInit {
   public onDeleteSelected(movieId: number): void {
     const movieToDelete = this.articleService.getMovieById(movieId);
     if (movieToDelete && this.isMovieAuthor(movieToDelete)) {
-      if (confirm('確定要刪除這篇文章嗎？')) {
+      if (confirm('確定要刪除這篇文章嗎？')) { //帶入電影標題
         this.articleService.deleteMovie(movieId);
         this.loadMovies();
-        this.router.navigate(['/']);
+        this.router.navigate(['/movielist']);
       }
     } else {
       alert('您無權刪除此文章')

@@ -3,7 +3,7 @@
     <li [ngbNavItem]="1">
       <button ngbNavLink>新增文章</button>
       <ng-template ngbNavContent>
-        <form [formGroup]="articleForm" class="form-article" (ngSubmit)="onSubmit()">
+        <form [formGroup]="articleForm" class="form-article p-4 rounded" (ngSubmit)="onSubmit()">
           <label for="name">電影名稱</label>
           <input id="name" type="text" formControlName="name" placeholder="請輸入電影名稱">
 
@@ -11,7 +11,8 @@
           <input id="focus" type="text" formControlName="focus" placeholder="請輸入最喜歡的電影名言/金句">
 
           <label for="content">文章內容</label>
-          <textarea name="content" id="content" formControlName="content" placeholder="請輸入電影影評/電影心得"></textarea>
+          <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content"
+            placeholder="請輸入電影影評/電影心得"></textarea>
 
           <label for="photo">上傳圖片</label>
           <input id="photo" type="file" (change)="onClickFileSelectBtn($event)">
@@ -30,25 +31,26 @@
       <ng-template ngbNavContent>
         <div *ngIf="movies.length > 0">
           <div class="container">
-            <label class="select" for="selectMovies">請選擇要修改的電影</label>
+            <label class="select py-3 mb-2 fs-3-5" for="selectMovies">請選擇要修改的電影</label>
             <select id="selectMovies" (change)="onMovieSelect($event)">
               <option value="">請選擇要修改的電影</option>
               <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}</option>
             </select>
           </div>
 
-          <form *ngIf="selectedMovieId" [formGroup]="articleForm" class="form-edit-article" (ngSubmit)="onEditSubmit()">
-            <label for="editName">電影名稱</label>
-            <input id="editName" type="text" formControlName="name">
+          <form *ngIf="selectedMovieId" [formGroup]="articleForm" class="form-edit-article p-4 rounded"
+            (ngSubmit)="onEditSubmit()">
+            <label for="name">電影名稱</label>
+            <input id="name" type="text" formControlName="name">
 
-            <label for="editFocus">電影金句</label>
-            <input id="editFocus" type="text" formControlName="focus">
+            <label for="focus">電影金句</label>
+            <input id="focus" type="text" formControlName="focus">
 
-            <label for="editContent">文章内容</label>
-            <textarea id="editContent" formControlName="content"></textarea>
+            <label for="content">文章内容</label>
+            <textarea class="lh-lg fs-7" id="content" formControlName="content"></textarea>
 
-            <label for="editPhoto">上傳圖片</label>
-            <input id="editPhoto" type="file" (change)="onClickFileSelectBtn($event)">
+            <label for="photo">上傳圖片</label>
+            <input id="photo" type="file" (change)="onClickFileSelectBtn($event)">
 
             <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
 
@@ -63,10 +65,10 @@
     <li [ngbNavItem]="3">
       <button ngbNavLink>刪除文章</button>
       <ng-template ngbNavContent>
-        <div *ngIf="movies.length > 0" class="delete-section">
-          <h3>請選擇要刪除的文章</h3>
+        <div *ngIf="movies.length > 0" class="delete-section p-3">
+          <h3 class="text-center pt-2 pb-3">請選擇要刪除的文章</h3>
           <div class="movie-list">
-            <div *ngFor="let movie of movies" class="movie-item">
+            <div *ngFor="let movie of movies" class="movie-item p-3">
               <div class="movie-info">
                 <h4>{{ movie.name }}</h4>
                 <p>{{ movie.focus }}</p>
@@ -77,11 +79,9 @@
             </div>
           </div>
         </div>
-        <div *ngIf="movies.length === 0" class="no-movies">
-          目前沒有任何文章
-        </div>
       </ng-template>
     </li>
   </ul>
 </section>
+
 <div [ngbNavOutlet]="nav" class="mt-2"></div>

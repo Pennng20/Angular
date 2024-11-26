@@ -1,29 +1,29 @@
 <!-- *ngIf 根據條件動態地添加或移除 DOM 元素 -->
 <div class="containar p-3">
   <section class="login text-center rounded">
-    <div *ngIf="!username; else loggedInContent">
+    <div *ngIf="!username">
       <div class="row">
         <div class="login-text m-auto col-lg-5 col-sm-12">
-          <img class="mb-4" src="/assets/logo.svg" alt="logo">
+          <img class="mb-4 lh-lg" src="/assets/logo.svg" alt="logo">
           <h3>立即登入&nbsp;!</h3>
           <h3>開始撰寫影評吧&nbsp;!</h3>
         </div>
 
-        <div class="form-login col-lg-7 col-sm-12" *ngIf="!loginError; else loggedInContent">
-          <form [formGroup]="loginForm" (ngSubmit)="onClickLoginBtn()">
+        <div class="form-login col-lg-7 col-sm-12" *ngIf="!loginError">
+          <form [formGroup]="loginForm" (ngSubmit)="onSubmitLoginBtn()">
             <label for="email">帳號</label>
-            <input id="email" type="text" formControlName="email" placeholder="請輸入信箱符合格式">
+            <input id="email" type="text" formControlName="email" placeholder="請輸入信箱">
 
             <label for="password">密碼</label>
-            <input id="password" type="text" formControlName="password" placeholder="請輸入8-15位數的數字及英文">
+            <input id="password" type="text" formControlName="password" placeholder="請輸入密碼">
 
             <div class="button">
               <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>
             </div>
           </form>
           <!-- async會自動訂閱可觀察對象，並根據發出的值更新，並在組件銷毀時自動取消訂閱。 -->
-          <div *ngIf="loginError$ | async" class="error-message">
-            <p>登入失敗！請檢查用戶名、密碼和電子郵件。</p>
+          <div *ngIf="loginError" class="error-message">
+            <p>登入失敗！請輸入正確的帳號和密碼。</p>
           </div>
         </div>
       </div>
@@ -31,9 +31,3 @@
   </section>
 </div>
 
-<ng-template #loggedInContent>
-  <div class="loginsuccess" *ngIf="welcomeMessage">
-    <h3>歡迎回來~{{ username }}~</h3>
-    <h3>兩秒後將自動跳轉回首頁</h3>
-  </div>
-</ng-template>

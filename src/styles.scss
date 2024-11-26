@@ -123,6 +123,10 @@ button:disabled,
   font-size: 20px;
 }
 
+.fs-7 {
+  font-size: 14px;
+}
+
 .m-6 {
   margin: 60px;
 }
@@ -139,6 +143,10 @@ button:disabled,
   color: var(--text-color);
 }
 
-.tab-content > .active {
+.tab-content>.active {
   padding: 0 16px;
+}
+
+.P-6 {
+  padding: 20px;
 }

@@ -25,10 +25,8 @@ export class LoginComponent {
   private _loginForm: FormGroup;
   private _loginError: boolean = false;
   private _userName: string = '';
-  private _welcomeMessage: boolean = false;
   private loginService: LoginService = inject(LoginService);
   public router: Router = inject(Router);
-  public loginError$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public get loginForm(): FormGroup {
     return this._loginForm;
@@ -38,13 +36,14 @@ export class LoginComponent {
     return this._loginError;
   }
 
+  public set loginError(value: boolean) {
+    this._loginError = value;
+  }
+
   public get username(): string {
     return this._userName;
   }
 
-  public get welcomeMessage(): boolean {
-    return this._welcomeMessage;
-  }
   /**
    * @param fb 創建表單的服務，可快速創建 FormGroup、FormControl、驗證邏輯。創建表單_loginForm。
    */
@@ -65,27 +64,25 @@ export class LoginComponent {
     });
   }
 
-  public onClickLoginBtn(): void {
+  public onSubmitLoginBtn(): void {
     if (this.loginForm.valid) {
       //表單驗證
-      const { password, email } = this.loginForm.value;
+      const { password, email } = this.loginForm.value; //no縮寫
       //調用login方法
-      const success = this.loginService.login(password, email);
+      const success: boolean = this.loginService.login(password, email);
       if (success) {
-        this.loginError$.next(false);
-        this._welcomeMessage = true;
+        this.loginError = false;
         this.router.navigate(['/']);
       } else {
-        this.loginError$.next(true);
+        this.loginError = true;
       }
     } else {
-      this.loginError$.next(true);
+      this.loginError = true;
     }
   }
 
   public onClickLogoutBtn(): void {
     this.loginService.logout();
-    this._userName = '';
-    this._welcomeMessage = false;
+    this._userName = ''; //set
   }
 }
