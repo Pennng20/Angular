@@ -1,16 +1,21 @@
 <form [formGroup]="articleForm" class="form-article p-4 rounded" (ngSubmit)="onSubmit()">
   <label for="name">電影名稱</label>
-  <input id="name" type="text" formControlName="name" placeholder="請輸入電影名稱">
+  <input id="name" type="text" formControlName="name" maxlength="20" (input)="updateNameLength()" placeholder="請輸入電影名稱">
+  <span class="namelength">{{ nameLength }}/20</span>
 
   <label for="focus">電影金句</label>
-  <input id="focus" type="text" formControlName="focus" placeholder="請輸入最喜歡的電影名言/金句">
+  <input id="focus" type="text" formControlName="focus" maxlength="22" (input)="updateFocusLength()"
+    placeholder="請輸入最喜歡的電影名言/金句">
+  <span class="focuslength">{{ focusLength }}/22</span>
 
   <label for="content">文章內容</label>
-  <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content"
-    placeholder="請輸入電影影評/電影心得"></textarea>
+  <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content" maxlength="1000"
+    (input)="updateContentLength()" placeholder="請輸入電影影評/電影心得"></textarea>
+  <span class="contentlength">{{ contentLength }}/1000</span>
 
+  <!-- accept瀏覽器初步過濾 僅允許選擇特定副檔名的檔案 -->
   <label for="photo">上傳圖片</label>
-  <input id="photo" type="file" (change)="onClickFileSelectBtn($event)">
+  <input id="photo" type="file" accept=".jpg,.jpeg,.png,.gif,.bmp" (change)="onClickFileSelectBtn($event)">
 
   <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
 

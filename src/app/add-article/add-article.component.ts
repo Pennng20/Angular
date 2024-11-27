@@ -21,6 +21,9 @@ export class AddArticleComponent {
   private _articleForm: FormGroup;
   private _movies: MoviePost[] = [];
   private _imageBase64: string = '';
+  private _contentLength: number = 0;
+  private _nameLength: number = 0;
+  private _focusLength: number = 0;
 
   public get articleForm(): FormGroup {
     return this._articleForm;
@@ -33,6 +36,31 @@ export class AddArticleComponent {
   public get imageBase64(): string {
     return this._imageBase64;
   }
+  // 內文 限制字數
+  public get contentLength(): number {
+    return this._contentLength;
+  }
+
+  public set contentLength(value: number) {
+    this._contentLength = value;
+  }
+  // 標題 限制字數
+  public get nameLength(): number {
+    return this._nameLength;
+  }
+
+  public set nameLength(value: number) {
+    this._nameLength = value;
+  }
+  // 金句 限制字數
+  public get focusLength(): number {
+    return this._focusLength;
+  }
+
+  public set focusLength(value: number) {
+    this._focusLength = value;
+  }
+
   /**
    * FormGroup
    * @param fb 創建一個表單群組 (_articleForm)
@@ -45,12 +73,12 @@ export class AddArticleComponent {
     this._articleForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
       focus: ['', [Validators.required, Validators.maxLength(22)]],
-      content: ['', Validators.required],
+      content: ['', [Validators.required, Validators.maxLength(1000)]],
       photo: [null, Validators.required]
     });
   }
 
-  private getMoieList(): void { //getMoieList
+  private getMoieList(): void {
     this._movies = this.articleService.getMovies();
   }
 
@@ -68,6 +96,16 @@ export class AddArticleComponent {
     const input = event.target as HTMLInputElement;
     if (input && input.files && input.files[0]) {
       const file = input.files[0];
+
+      // 設定只能上傳圖片格式的檔案
+      // includes()用來檢查某個值是否存在於陣列中
+      const photoType = ['image/jpeg', 'image/png', 'image/gif', 'image/bmp'];
+      if (!photoType.includes(file.type)) {
+        alert('請上傳有效的圖片檔案(jpg, png, gif, bmp)');
+        input.value = '';
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = () => {
         this._imageBase64 = reader.result as string;
@@ -93,16 +131,17 @@ export class AddArticleComponent {
         author: authorName,
         userId: formValue.userId,
         photo: formValue.photo,
+        // /\//g 正則表達式 \/ 表示斜線字元 / 是分隔符  g 是全域標誌，意味著替換所有的斜線
         updateTime: new Date().toLocaleString('zh-TW', {
           // 設置為 24 小時制
           hour12: false,
           year: 'numeric',
-          month: 'numeric',
-          day: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
           hour: '2-digit',
           minute: '2-digit',
           second: '2-digit'
-        }),
+        }).replace(/\//g, '-'),
         content: formValue.content
       };
 
@@ -113,5 +152,16 @@ export class AddArticleComponent {
       // 提交表單後重置
       this.resetForm();
     }
+  }
+  public updateContentLength(): void {
+    this.contentLength = this.articleForm.get('content')?.value?.length;
+  }
+
+  public updateNameLength(): void {
+    this.nameLength = this.articleForm.get('name')?.value?.length;
+  }
+
+  public updateFocusLength(): void {
+    this.focusLength = this.articleForm.get('focus')?.value?.length;
   }
 }
