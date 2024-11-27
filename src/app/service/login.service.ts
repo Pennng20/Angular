@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { BehaviorSubject } from "rxjs";
-import { UserData } from "../interface/user-data";
+import { UserData } from "../mockdata/user-data";
 import { TempUserData } from "../interface/userdata";
 
 
@@ -13,7 +13,7 @@ export class LoginService {
    * @private 變數userSubject要是BehaviorSubject<any>類別 初始值為null
    * @user$ 是一個 Observable，可以被外部組件或服務訂閱，當 userSubject 的值改變時，它會自動通知所有訂閱者。
    */
-  public userSubject$ = new BehaviorSubject<TempUserData>({id:0,username:'',picture:''});
+  public userSubject$ = new BehaviorSubject<TempUserData>({ id: 0, username: '', picture: '' });
   public userObserver = this.userSubject$.asObservable();
 
   /**
@@ -29,7 +29,7 @@ export class LoginService {
     }
   }
   /**
-   * (u)函數的參數，它代表 mockUsers 陣列中的每一個元素。
+   * (userInfo)函數的參數，它代表 mockUsers 陣列中的每一個元素。
    * @param password 使用者密碼
    * @param email 信箱
    * @returns true登入成功，false登錄失敗。
@@ -37,7 +37,7 @@ export class LoginService {
   public login(password: string, email: string): boolean {
     //在userData裡面找是否有符合的密碼和信箱
     const user = UserData.find(
-      (u) => u.password === password && u.email === email
+      (userInfo) => userInfo.password === password && userInfo.email === email
     );
     if (user) {
       localStorage.setItem('user', JSON.stringify(user));
@@ -51,6 +51,6 @@ export class LoginService {
   //登出、清除資料
   public logout(): void {
     localStorage.removeItem('user');
-    this.userSubject$.next({id:0,username:'',picture:''});
+    this.userSubject$.next({ id: 0, username: '', picture: '' });
   }
 }

@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { LoginService } from './service/login.service';
 import { CommonModule } from '@angular/common';
@@ -17,15 +17,15 @@ export class AppComponent {
   /**
    * @type {Observable<{ username: string, picture: string }>} Observable 發出的數據結構
    */
-  private userObserver: Observable<{ username: string, picture: string }>;
-  private loginService: LoginService = inject(LoginService);
-  public router: Router = inject(Router);
+  private userObserver: Observable<{ id: number, username: string, picture: string }>;
 
-  constructor() {
-    this.userObserver = this.loginService.userSubject$;
+  constructor(
+    private loginService: LoginService,
+    public router: Router) {
+    this.userObserver = this.loginService.userSubject$ as Observable<{ id: number, username: string, picture: string }>;
   }
 
-  public getUser$(): Observable<{ username: string, picture: string }> {
+  public getUser$(): Observable<{ id: number, username: string, picture: string }> {
     return this.userObserver;
   }
 

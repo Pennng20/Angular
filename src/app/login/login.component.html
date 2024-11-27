@@ -1,7 +1,7 @@
 <!-- *ngIf 根據條件動態地添加或移除 DOM 元素 -->
 <div class="containar p-3">
   <section class="login text-center rounded">
-    <div *ngIf="!username">
+    <div *ngIf="!userName">
       <div class="row">
         <div class="login-text m-auto col-lg-5 col-sm-12">
           <img class="mb-4 lh-lg" src="/assets/logo.svg" alt="logo">
@@ -15,13 +15,19 @@
             <input id="email" type="text" formControlName="email" placeholder="請輸入信箱">
 
             <label for="password">密碼</label>
-            <input id="password" type="text" formControlName="password" placeholder="請輸入密碼">
+            <div class="password-container">
+              <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                placeholder="請輸入密碼" class="form-control">
+              <span class="password-eye" (click)="onClickEyeBtn()">
+                <i *ngIf="!showPassword" class="fas fa-eye-slash"></i>
+                <i *ngIf="showPassword" class="fas fa-eye"></i>
+              </span>
+            </div>
 
             <div class="button">
               <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>
             </div>
           </form>
-          <!-- async會自動訂閱可觀察對象，並根據發出的值更新，並在組件銷毀時自動取消訂閱。 -->
           <div *ngIf="loginError" class="error-message">
             <p>登入失敗！請輸入正確的帳號和密碼。</p>
           </div>
@@ -30,4 +36,3 @@
     </div>
   </section>
 </div>
-

@@ -1,10 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component} from '@angular/core';
 import { LoginService } from '../service/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-log-in',
@@ -25,8 +24,7 @@ export class LoginComponent {
   private _loginForm: FormGroup;
   private _loginError: boolean = false;
   private _userName: string = '';
-  private loginService: LoginService = inject(LoginService);
-  public router: Router = inject(Router);
+  private _showPassword: boolean = false;
 
   public get loginForm(): FormGroup {
     return this._loginForm;
@@ -40,14 +38,25 @@ export class LoginComponent {
     this._loginError = value;
   }
 
-  public get username(): string {
+  public get userName(): string {
     return this._userName;
+  }
+
+  public set userName(value: string) {
+    this._userName = value;
+  }
+
+  public get showPassword(): boolean {
+    return this._showPassword;
   }
 
   /**
    * @param fb 創建表單的服務，可快速創建 FormGroup、FormControl、驗證邏輯。創建表單_loginForm。
    */
-  constructor(private fb: FormBuilder) {
+  constructor(
+    private fb: FormBuilder,
+    private loginService: LoginService,
+    private router: Router) {
     this._loginForm = this.createLoginForm();
   }
   /**
@@ -66,9 +75,10 @@ export class LoginComponent {
 
   public onSubmitLoginBtn(): void {
     if (this.loginForm.valid) {
-      //表單驗證
-      const { password, email } = this.loginForm.value; //no縮寫
-      //調用login方法
+      // 表單驗證
+      const password = this.loginForm.value.password;
+      const email = this.loginForm.value.email;
+      // 調用login方法
       const success: boolean = this.loginService.login(password, email);
       if (success) {
         this.loginError = false;
@@ -83,6 +93,9 @@ export class LoginComponent {
 
   public onClickLogoutBtn(): void {
     this.loginService.logout();
-    this._userName = ''; //set
+  }
+
+  public onClickEyeBtn() {
+    this._showPassword = !this.showPassword;
   }
 }

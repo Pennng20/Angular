@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { MoviePost } from '../interface/moviepost';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
@@ -13,21 +13,20 @@ export class ArticleService {
    */
   private readonly savekey: string = '';
   private movieData: MoviePost[] = [];
-  private router: Router = inject(Router);
-  private loginService: LoginService = inject(LoginService);
-
   /**
    * 檢查瀏覽器是否已存在電影數據，如果有則解析數據賦值給movieData
    */
-  constructor() {
+  constructor(
+    private router: Router,
+    private loginService: LoginService) {
     this.savekey = 'movieData';
-    //從本地端儲存電影資料
+    // 從本地端儲存電影資料
     const saveMovies = localStorage.getItem(this.savekey);
-    //檢查是否成功獲取本地端儲存電影資料，JSON.parse將字串轉為物件
+    // 檢查是否成功獲取本地端儲存電影資料，JSON.parse將字串轉為物件
     if (saveMovies) {
       this.movieData = JSON.parse(saveMovies);
     };
-    //確保數據被儲存，JSON.stringify將物件轉為字串
+    // 確保數據被儲存，JSON.stringify將物件轉為字串
     localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
   }
   /**
@@ -48,14 +47,14 @@ export class ArticleService {
    * 確保ID的惟一值，用Math.max找到最大值並+1，若為空值則返回1
    */
   public addMovie(newMovie: MoviePost): void {
-    //獲取當前用戶登入訊息
+    // 獲取當前用戶登入訊息
     const user = this.loginService.userSubject$.value;
-    //自動帶入文章作者，設定會員唯一id
+    // 自動帶入文章作者，設定會員唯一id
     newMovie.author = user.username;
     newMovie.userId = user.id;
-    //設定唯一id
+    // 設定唯一id
     newMovie.id = this.movieData.length > 0 ? Math.max(...this.movieData.map(movie => movie.id)) + 1 : 1;
-    //push新增電影到陣列中
+    // push新增電影到陣列中
     this.movieData.push(newMovie);
     this.saveToLocalStorage();
     alert('新增成功');
@@ -68,15 +67,16 @@ export class ArticleService {
    * @returns void無返回值
    */
   public putMovie(updatedMovie: MoviePost): void {
-    //獲取當前用戶登入訊息
+    // 獲取當前用戶登入訊息
     const user = this.loginService.userSubject$.value;
-    //找到要更新的電影
+    // 找到要更新的電影
     const movieIndex = this.movieData.findIndex(movie => movie.id === updatedMovie.id);
-    //獲取當前電影文章內容
+    // 獲取當前電影文章內容
     const movie = this.movieData[movieIndex];
-    //檢查是否為文章作者
+    // 檢查是否為文章作者
     if (movie.userId === user.id) {
-      this.movieData.splice(movieIndex, 1, updatedMovie);  // 先刪除該索引的電影，再插入新的 updatedMovie
+      // 先刪除該索引的電影，再插入新的 updatedMovie
+      this.movieData.splice(movieIndex, 1, updatedMovie);
       this.saveToLocalStorage();
       alert('修改成功');
       this.router.navigate(['/movielist']);
@@ -90,11 +90,11 @@ export class ArticleService {
    * @param id 要刪除的文章id
    */
   public deleteMovie(id: number): void {
-    //獲取當前用戶登入訊息
+    // 獲取當前用戶登入訊息
     const user = this.loginService.userSubject$.value;
-    //找到要刪除的電影
+    // 找到要刪除的電影
     const movie = this.movieData.find(movie => movie.id === id);
-    //檢查是否為文章作者
+    // 檢查是否為文章作者
     if (movie?.userId === user.id) {
       this.movieData = this.movieData.filter(movie => movie.id !== id);
       this.saveToLocalStorage();

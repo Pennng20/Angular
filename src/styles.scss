@@ -72,6 +72,16 @@ body {
   font-size: 14px;
 }
 
+.form-login input[type="password"] {
+  background-color: var(--background-color2);
+  border: 1px solid var(--border-color2);
+  border-radius: 10px;
+  width: 60%;
+  padding: 6px 24px;
+  color: var(--text-color2);
+  font-size: 14px;
+}
+
 .new-btn {
   padding: 8px 28px;
   border: solid 1px var(--text-color);

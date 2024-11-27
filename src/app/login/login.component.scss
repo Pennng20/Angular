@@ -23,3 +23,18 @@
     margin: 16px auto 10px auto;
   }
 }
+
+.password-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.password-eye {
+  position: absolute;
+  right: 100px;
+  top: 6px;
+  cursor: pointer;
+  z-index: 10;
+  color: var(--text-color2);
+}
