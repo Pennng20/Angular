@@ -63,7 +63,7 @@ export class EditArticleComponent {
     this._focusLength = value;
   }
   /**
-   * FormGroup
+   * @private 使用隱私層級來注入依賴，會自動創建屬性。可以在類的其他方法中直接使用它們。
    * @param fb 創建一個表單群組 (_articleForm)
    */
   constructor(
@@ -129,6 +129,8 @@ export class EditArticleComponent {
     if (selectedMovie) {
       this._selectedMovieId = movieId;
       // 用來局部更新表單中的某些欄位
+      // 使用 patchValue()更新表單欄位，只會影響與表單欄位formControlName有關的資料。不會自動更新this._imageBase64。
+      // 圖片不會經常更新
       this._articleForm.patchValue({
         name: selectedMovie.name,
         focus: selectedMovie.focus,
