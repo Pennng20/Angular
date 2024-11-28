@@ -9,7 +9,7 @@
           <h3>開始撰寫影評吧&nbsp;!</h3>
         </div>
 
-        <div class="form-login col-lg-7 col-sm-12" *ngIf="!loginError">
+        <div class="form-login col-lg-7 col-sm-12">
           <form [formGroup]="loginForm" (ngSubmit)="onSubmitLoginBtn()">
             <label for="email">帳號</label>
             <input id="email" type="text" formControlName="email" placeholder="請輸入信箱">
@@ -18,19 +18,25 @@
             <div class="password-container">
               <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
                 placeholder="請輸入密碼" class="form-control">
+
               <span class="password-eye" (click)="onClickEyeBtn()">
                 <i *ngIf="!showPassword" class="fas fa-eye-slash"></i>
                 <i *ngIf="showPassword" class="fas fa-eye"></i>
               </span>
             </div>
 
+            <div *ngIf="loginError" class="pt-3">
+              <p>登入失敗，請輸入正確的帳號密碼。</p>
+            </div>
+
+            <div *ngIf="loginForm.get('email')?.hasError('email')" class="pt-3">
+              請輸入正確的信箱格式
+            </div>
+
             <div class="button">
               <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>
             </div>
           </form>
-          <div *ngIf="loginError" class="error-message">
-            <p>登入失敗！請輸入正確的帳號和密碼。</p>
-          </div>
         </div>
       </div>
     </div>

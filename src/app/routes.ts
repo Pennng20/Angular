@@ -5,6 +5,7 @@ import { MovieListComponent } from './movielist/movie-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './login/login.component';
 import { ArticleManagementComponent } from './article-management/article-management.component';
+import { EditArticleComponent } from './edit-article/edit-article.component';
 
 const routeConfig: Routes = [
   {
@@ -35,6 +36,11 @@ const routeConfig: Routes = [
     path: 'articleManagement',
     component: ArticleManagementComponent,
     title: '文章管理'
+  },
+  {
+    path: 'editarticle/:id',
+    component: EditArticleComponent,
+    title: '修改文章'
   }
 ];
 

@@ -1,30 +1,35 @@
-<div *ngIf="movies.length > 0">
-  <div class="container">
-    <label class="select py-3 mb-2 fs-3-5" for="selectMovies">請選擇要修改的電影</label>
-    <select id="selectMovies" (change)="onChangeMovieSelect($event)">
-      <option ngValue=0>請選擇要修改的電影</option>
-      <option *ngFor="let movie of movies" [value]="movie.id">{{ movie.name }}</option>
-    </select>
-  </div>
-
+<div *ngIf="selectedMovieId">
   <form *ngIf="selectedMovieId" [formGroup]="articleForm" class="form-edit-article p-4 rounded"
     (ngSubmit)="onEditSubmit()">
-    <label for="name">電影名稱</label>
-    <input id="name" type="text" formControlName="name">
+    <div class="input-wrapper">
+      <label for="name">電影名稱</label>
+      <input id="name" type="text" formControlName="name" maxlength="20" (input)="updateNameLength()"
+        placeholder="請輸入電影名稱">
+      <span class="namelength">{{ nameLength }}/20</span>
+    </div>
 
-    <label for="focus">電影金句</label>
-    <input id="focus" type="text" formControlName="focus">
+    <div class="input-wrapper">
+      <label for="focus">電影金句</label>
+      <input id="focus" type="text" formControlName="focus" maxlength="22" (input)="updateFocusLength()"
+        placeholder="請輸入最喜歡的電影名言/金句">
+      <span class="focuslength">{{ focusLength }}/22</span>
+    </div>
 
-    <label for="content">文章内容</label>
-    <textarea class="lh-lg fs-7" id="content" formControlName="content"></textarea>
+    <div class="input-wrapper">
+      <label for="content">文章內容</label>
+      <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content" maxlength="1000"
+        (input)="updateContentLength()" placeholder="請輸入電影影評/電影心得"></textarea>
+      <span class="contentlength">{{ contentLength }}/1000</span>
+    </div>
 
     <label for="photo">上傳圖片</label>
-    <input id="photo" type="file" (change)="onClickFileSelectBtn($event)">
+    <input id="photo" type="file" accept=".jpg,.jpeg,.png,.gif,.bmp" (change)="onClickFileSelectBtn($event)">
 
     <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
 
     <div class="button">
-      <button type="submit" class="btn btn-primary edit-btn my-4" [disabled]="articleForm.invalid">修改文章</button>
+      <!-- dirty 表示是否修改了表單的内容控制 -->
+      <button type="submit" class="btn btn-primary edit-btn my-4" [disabled]="!articleForm.dirty || !articleForm.valid">修改文章</button>
     </div>
   </form>
 </div>

@@ -79,8 +79,9 @@ export class LoginComponent {
       const password = this.loginForm.value.password;
       const email = this.loginForm.value.email;
       // 調用login方法
-      const success: boolean = this.loginService.login(password, email);
-      if (success) {
+      const isSuccess: boolean = this.loginService.login(password, email);
+
+      if (isSuccess) {
         this.loginError = false;
         this.router.navigate(['/']);
       } else {

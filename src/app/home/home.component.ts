@@ -16,7 +16,7 @@ import { ArticleService } from '../service/article.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  private _images: string[] = ['/assets/banner1.jpg', '/assets/banner2.jpg', '/assets/banner3.jpg', '/assets/banner4.jpg'];
+  private _images: string[] = ['/assets/banner1.png', '/assets/banner2.png', '/assets/banner4.png', '/assets/banner5.png', '/assets/banner6.png'];
 
   /**
    * @private 只能在該類別的內部被訪問，外部無法直接存取。

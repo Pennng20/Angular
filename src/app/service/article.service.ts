@@ -13,6 +13,7 @@ export class ArticleService {
    */
   private readonly savekey: string = '';
   private movieData: MoviePost[] = [];
+  private isAdminPage = false;
   /**
    * 檢查瀏覽器是否已存在電影數據，如果有則解析數據賦值給movieData
    */
@@ -29,12 +30,26 @@ export class ArticleService {
     // 確保數據被儲存，JSON.stringify將物件轉為字串
     localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
   }
+
+  /**
+  * @param isAdmin 是否是文章管理頁面
+  */
+  public setIsAdminPage(isAdmin: boolean): void {
+    this.isAdminPage = isAdmin;
+  }
   /**
    * @returns 淺拷貝 獲取所有電影清單
    * addMovie 新增電影清單
    */
   public getMovies(): MoviePost[] {
-    return [...this.movieData];
+    if (this.isAdminPage) {
+      // 如果是文章管理頁面，返回當前會員的文章
+      const userId = this.loginService.userSubject$.value.id;
+      return this.movieData.filter(movie => movie.userId === userId);
+    } else {
+      // 如果不是文章管理頁面，返回所有的文章
+      return this.movieData;
+    }
   }
 
   public getMovieById(id: number): MoviePost | undefined {
@@ -78,7 +93,6 @@ export class ArticleService {
       // 先刪除該索引的電影，再插入新的 updatedMovie
       this.movieData.splice(movieIndex, 1, updatedMovie);
       this.saveToLocalStorage();
-      alert('修改成功');
       this.router.navigate(['/movielist']);
     } else {
       alert('您無權修改此文章');

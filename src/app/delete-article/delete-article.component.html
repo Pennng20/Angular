@@ -5,10 +5,16 @@
       <div class="movie-info">
         <h4>{{ movie.name }}</h4>
         <p>{{ movie.focus }}</p>
-        <p class="author">作者：{{ movie.author }}</p>
-        <p class="updatetime">更新時間：{{ movie.updateTime }}</p>
+        <p class="updatetime">🕒&nbsp;{{ movie.updateTime }}</p>
       </div>
-      <button class="btn btn-danger" (click)="onDeleteSelected(movie.id)">刪除</button>
+      <div class="btn-group">
+        <button class="btn-edit" (click)="onClickEditBtn(movie.id)">
+          <img class="edit" src="/assets/edit.png" alt="edit-logo">
+        </button>
+        <button class="btn-danger" (click)="onClickDeleteBtn(movie.id)">
+          <img class="delete" src="/assets/delete.png" alt="delete-logo">
+        </button>
+      </div>
     </div>
   </div>
 </div>

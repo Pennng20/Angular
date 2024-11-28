@@ -86,7 +86,7 @@ export class MovieListComponent {
    * 用來檢查電影名稱中是否有匹配的文字。
    * @param text 電影名稱
    */
-  public searchBtn(text: string, search: HTMLInputElement) {
+  public onClickSearchBtn(text: string, search: HTMLInputElement) {
     if (!text) {
       this.movieSearch = this.movieData;
       return;

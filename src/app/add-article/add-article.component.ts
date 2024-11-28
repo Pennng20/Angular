@@ -78,7 +78,7 @@ export class AddArticleComponent {
     });
   }
 
-  private getMoieList(): void {
+  private getMovieList(): void {
     this._movies = this.articleService.getMovies();
   }
 
@@ -148,7 +148,7 @@ export class AddArticleComponent {
       // 將新創建的電影添加到文章服務中
       this.articleService.addMovie(newMovie);
       // 重新加載所有電影
-      this.getMoieList();
+      this.getMovieList();
       // 提交表單後重置
       this.resetForm();
     }

@@ -5,11 +5,10 @@
 
   <ng-container *ngIf="getUser$() | async as user">
     <ng-container *ngIf="user.id !== 0; else login">
-      <div class="header-group">
-        <img class="headerlogo m-2-5" [src]="user.picture" alt="logo">
-        <span>{{ user.username }}</span>
+      <div>
         <a [routerLink]="['/articleManagement']">
-          <button class="articlebtn btn btn-primary new-btn m-2-5 px-3">會員管理</button>
+          <img class="headerlogo m-2-5" [src]="user.picture" alt="logo">
+          <span>{{ user.username }}</span>
         </a>
         <button (click)="onClickLogoutBtn()" class="btn btn-primary new-btn m-2-5 px-3">登出</button>
       </div>

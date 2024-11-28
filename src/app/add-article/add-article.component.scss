@@ -6,53 +6,44 @@
   color: var(--text-color);
   position: relative;
 
+  input,
+  textarea {
+    width: 100%;
+    position: relative;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color3);
+  }
+
+  .namelength,
+  .focuslength,
   .contentlength {
     color: var(--text-color3);
     position: absolute;
-    bottom: 230px;
-    right: 33px;
-    padding: 0 3px;
-    border-radius: 3px;
+    bottom: -25;
+    right: 0;
+    padding: 9px 15px;
     z-index: 1;
   }
 
-  .namelength {
-    color: var(--text-color3);
-    position: absolute;
-    top: 66px;
-    right: 33px;
-    padding: 0 3px;
-    border-radius: 3px;
-    z-index: 1;
+  .contentlength {
+    bottom: 0;
+    padding: 16px;
   }
 
-  .focuslength {
-    color: var(--text-color3);
-    position: absolute;
-    top: 156px;
-    right: 33px;
-    padding: 0 3px;
-    border-radius: 3px;
-    z-index: 1;
+  .input-wrapper {
+    position: relative;
   }
 }
 
 .form-article input {
-  width: 100%;
-  padding: 10px;
   margin-bottom: 16px;
-  border: 1px solid var(--border-color3);
-  border-radius: 4px;
 }
 
 .form-article textarea {
-  width: 100%;
   max-width: 1000px;
   min-height: 200px;
-  padding: 10px;
-  border: 1px solid var(--border-color3);
   background-color: var(--background-color);
-  border-radius: 4px;
   color: var(--text-color);
 }
 

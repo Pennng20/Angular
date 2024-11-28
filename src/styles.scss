@@ -105,6 +105,16 @@ body {
   margin-bottom: 40px;
 }
 
+.btn-edit {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+}
+
+.btn-danger {
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
+}
+
 button:disabled,
 .btn:disabled {
   background-color: #d6d6d6;
@@ -160,4 +170,9 @@ button:disabled,
 
 .P-6 {
   padding: 20px;
+}
+
+img,
+svg {
+  padding: 5px;
 }

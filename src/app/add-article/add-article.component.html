@@ -1,17 +1,24 @@
 <form [formGroup]="articleForm" class="form-article p-4 rounded" (ngSubmit)="onSubmit()">
-  <label for="name">電影名稱</label>
-  <input id="name" type="text" formControlName="name" maxlength="20" (input)="updateNameLength()" placeholder="請輸入電影名稱">
-  <span class="namelength">{{ nameLength }}/20</span>
+  <div class="input-wrapper">
+    <label for="name">電影名稱</label>
+    <input id="name" type="text" formControlName="name" maxlength="20" (input)="updateNameLength()"
+      placeholder="請輸入電影名稱">
+    <span class="namelength">{{ nameLength }}/20</span>
+  </div>
 
-  <label for="focus">電影金句</label>
-  <input id="focus" type="text" formControlName="focus" maxlength="22" (input)="updateFocusLength()"
-    placeholder="請輸入最喜歡的電影名言/金句">
-  <span class="focuslength">{{ focusLength }}/22</span>
+  <div class="input-wrapper">
+    <label for="focus">電影金句</label>
+    <input id="focus" type="text" formControlName="focus" maxlength="22" (input)="updateFocusLength()"
+      placeholder="請輸入最喜歡的電影名言/金句">
+    <span class="focuslength">{{ focusLength }}/22</span>
+  </div>
 
-  <label for="content">文章內容</label>
-  <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content" maxlength="1000"
-    (input)="updateContentLength()" placeholder="請輸入電影影評/電影心得"></textarea>
-  <span class="contentlength">{{ contentLength }}/1000</span>
+  <div class="input-wrapper">
+    <label for="content">文章內容</label>
+    <textarea class="lh-lg fs-7" name="content" id="content" formControlName="content" maxlength="1000"
+      (input)="updateContentLength()" placeholder="請輸入電影影評/電影心得"></textarea>
+    <span class="contentlength">{{ contentLength }}/1000</span>
+  </div>
 
   <!-- accept瀏覽器初步過濾 僅允許選擇特定副檔名的檔案 -->
   <label for="photo">上傳圖片</label>

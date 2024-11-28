@@ -35,10 +35,10 @@ export class DeleteArticleComponent {
   }
 
   public ngOnInit(): void {
-    this.getMoieList();
+    this.getMovieList();
   }
 
-  private getMoieList(): void { //getMoieList
+  private getMovieList(): void { //getMovieList
     this._movies = this.articleService.getMovies();
   }
 
@@ -66,16 +66,25 @@ export class DeleteArticleComponent {
    * movieToDelete調用getMovieById方法取得電影資料
    * 如果有電影存在且是該電影作者即可刪除，否則false
    */
-  public onDeleteSelected(movieId: number): void {
+  public onClickDeleteBtn(movieId: number): void {
     const movieToDelete = this.articleService.getMovieById(movieId);
     if (movieToDelete && this.isMovieAuthor(movieToDelete)) {
-      if (confirm('確定要刪除這篇文章嗎？')) { //帶入電影標題
+      if (confirm(`確定要刪除這篇文章 ${movieToDelete.name} 嗎？`)) {
         this.articleService.deleteMovie(movieId);
-        this.getMoieList();
+        this.getMovieList();
         this.router.navigate(['/movielist']);
       }
     } else {
       alert('您無權刪除此文章')
+    }
+  }
+  public onClickEditBtn(movieId: number): void {
+    const movieToEdit = this.articleService.getMovieById(movieId);
+
+    if (movieToEdit && this.isMovieAuthor(movieToEdit)) {
+      this.router.navigate(['/editarticle', movieId]);
+    } else {
+      alert('您無權修改此文章');
     }
   }
   /**
