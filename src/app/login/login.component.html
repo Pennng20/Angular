@@ -17,7 +17,7 @@
             <label for="password">密碼</label>
             <div class="password-container">
               <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
-                placeholder="請輸入密碼" class="form-control">
+                placeholder="請輸入密碼">
 
               <span class="password-eye" (click)="onClickEyeBtn()">
                 <i *ngIf="!showPassword" class="fas fa-eye-slash"></i>
@@ -25,16 +25,20 @@
               </span>
             </div>
 
-            <div *ngIf="loginError" class="pt-3">
-              <p>登入失敗，請輸入正確的帳號密碼。</p>
-            </div>
-
-            <div *ngIf="loginForm.get('email')?.hasError('email')" class="pt-3">
-              請輸入正確的信箱格式
-            </div>
-
             <div class="button">
               <button type="submit" class="btn btn-primary new-btn mt-5" [disabled]="loginForm.invalid">登入</button>
+            </div>
+            <div>
+              <div class="error-message">
+                <div *ngIf="loginError">
+                  <p>登入失敗，請輸入正確的帳號密碼。</p>
+                </div>
+
+                <!-- hasError('email') 檢查是否有 email 格式驗證錯誤 -->
+                <div *ngIf="loginForm.get('email')?.hasError('email')">
+                  請輸入正確的信箱格式
+                </div>
+              </div>
             </div>
           </form>
         </div>

@@ -77,7 +77,7 @@ export class EditArticleComponent {
       name: ['', [Validators.required, Validators.maxLength(20)]],
       focus: ['', [Validators.required, Validators.maxLength(22)]],
       content: ['', Validators.required],
-      photo: [null, Validators.required]
+      photo: ['', Validators.required]
     });
   }
 
@@ -123,23 +123,24 @@ export class EditArticleComponent {
       reader.readAsDataURL(file);
     }
   }
-
+  // 更新表單
   private loadMovieData(movieId: number): void {
     const selectedMovie = this.articleService.getMovieById(movieId);
     if (selectedMovie) {
       this._selectedMovieId = movieId;
       // 用來局部更新表單中的某些欄位
       // 使用 patchValue()更新表單欄位，只會影響與表單欄位formControlName有關的資料。不會自動更新this._imageBase64。
-      // 圖片不會經常更新
       this._articleForm.patchValue({
         name: selectedMovie.name,
         focus: selectedMovie.focus,
         content: selectedMovie.content,
         photo: selectedMovie.photo
       });
+      this.updateNameLength();
+      this.updateFocusLength();
+      this.updateContentLength();
+
       this._imageBase64 = selectedMovie.photo;
-    } else {
-      alert('無法找到此電影');
     }
   }
   /**
@@ -213,17 +214,20 @@ export class EditArticleComponent {
     return currentUser && movie.userId === currentUser.id;
   }
   /**
-   * 計算剩餘數字
+   * 計算並返回 contentValue 字符的長度
    */
   public updateContentLength(): void {
-    this.contentLength = this.articleForm.get('content')?.value?.length;
+    const contentValue = this.articleForm.get('content')?.value;
+    this.contentLength = contentValue.length;
   }
 
   public updateNameLength(): void {
-    this.nameLength = this.articleForm.get('name')?.value?.length;
+    const nameValue = this.articleForm.get('name')?.value;
+    this.nameLength = nameValue.length;
   }
 
   public updateFocusLength(): void {
-    this.focusLength = this.articleForm.get('focus')?.value?.length;
+    const focusValue = this.articleForm.get('focus')?.value;
+    this.focusLength = focusValue.length;
   }
 }

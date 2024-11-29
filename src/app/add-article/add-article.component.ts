@@ -6,6 +6,7 @@ import { ArticleService } from '../service/article.service';
 import { LoginService } from '../service/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { DateFormatPipe } from '../date-format.pipe';
 
 @Component({
   selector: 'app-add-article',
@@ -72,9 +73,9 @@ export class AddArticleComponent {
   ) {
     this._articleForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
-      focus: ['', [Validators.required, Validators.maxLength(22)]],
+      focus: ['', [Validators.required, Validators.maxLength(25)]],
       content: ['', [Validators.required, Validators.maxLength(1000)]],
-      photo: [null, Validators.required]
+      photo: ['', Validators.required]
     });
   }
 
@@ -123,7 +124,7 @@ export class AddArticleComponent {
       const formValue = this.articleForm.value;
       // 從當前用戶的資料中獲取 username
       const authorName = this.loginService.userSubject$.value?.username;
-
+      // Pipe把 / 改成 -
       const newMovie: MoviePost = {
         id: this.movies.length + 1,
         name: formValue.name,
@@ -131,17 +132,7 @@ export class AddArticleComponent {
         author: authorName,
         userId: formValue.userId,
         photo: formValue.photo,
-        // /\//g 正則表達式 \/ 表示斜線字元 / 是分隔符  g 是全域標誌，意味著替換所有的斜線
-        updateTime: new Date().toLocaleString('zh-TW', {
-          // 設置為 24 小時制
-          hour12: false,
-          year: 'numeric',
-          month: '2-digit',
-          day: '2-digit',
-          hour: '2-digit',
-          minute: '2-digit',
-          second: '2-digit'
-        }).replace(/\//g, '-'),
+        updateTime: DateFormatPipe.transform(new Date()),
         content: formValue.content
       };
 
@@ -153,6 +144,9 @@ export class AddArticleComponent {
       this.resetForm();
     }
   }
+  /**
+   * 計算剩餘數字
+   */
   public updateContentLength(): void {
     this.contentLength = this.articleForm.get('content')?.value?.length;
   }

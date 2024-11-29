@@ -4,7 +4,8 @@
   </a>
 
   <ng-container *ngIf="getUser$() | async as user">
-    <ng-container *ngIf="user.id !== 0; else login">
+    <!-- 如果 user.id != 0，顯示會員資訊和登出按鈕 -->
+    <ng-container *ngIf="user.id !== 0">
       <div>
         <a [routerLink]="['/articleManagement']">
           <img class="headerlogo m-2-5" [src]="user.picture" alt="logo">
@@ -14,10 +15,10 @@
       </div>
     </ng-container>
 
-    <ng-template #login>
+    <!-- 如果 user.id === 0 且不是登入頁面，顯示登入按鈕 -->
+    <ng-container *ngIf="user.id === 0 && !isLoginPage()">
       <button (click)="router.navigate(['/login'])" class="btn btn-primary new-btn m-2-5 px-3">登入</button>
-    </ng-template>
-
+    </ng-container>
   </ng-container>
 </section>
 

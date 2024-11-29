@@ -12,7 +12,7 @@
       <label for="focus">電影金句</label>
       <input id="focus" type="text" formControlName="focus" maxlength="22" (input)="updateFocusLength()"
         placeholder="請輸入最喜歡的電影名言/金句">
-      <span class="focuslength">{{ focusLength }}/22</span>
+      <span class="focuslength">{{ focusLength }}/25</span>
     </div>
 
     <div class="input-wrapper">
@@ -23,7 +23,7 @@
     </div>
 
     <label for="photo">上傳圖片</label>
-    <input id="photo" type="file" accept=".jpg,.jpeg,.png,.gif,.bmp" (change)="onClickFileSelectBtn($event)">
+    <input id="photo" type="file" accept=".jpg,.jpeg,.png,.bmp" (change)="onClickFileSelectBtn($event)">
 
     <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
 

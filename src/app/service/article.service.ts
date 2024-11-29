@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MoviePost } from '../interface/moviepost';
 import { LoginService } from './login.service';
 import { Router } from '@angular/router';
+import { MoviePostMockData } from '../mockdata/movie-post';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,14 @@ export class ArticleService {
   constructor(
     private router: Router,
     private loginService: LoginService) {
-    this.savekey = 'movieData';
+    // this.savekey = 'movieData';
     // 從本地端儲存電影資料
-    const saveMovies = localStorage.getItem(this.savekey);
+    // const saveMovies = localStorage.getItem(this.savekey);
     // 檢查是否成功獲取本地端儲存電影資料，JSON.parse將字串轉為物件
-    if (saveMovies) {
-      this.movieData = JSON.parse(saveMovies);
-    };
+    // if (saveMovies) {
+    //   this.movieData = JSON.parse(saveMovies);
+    // };
+    this.movieData = MoviePostMockData;
     // 確保數據被儲存，JSON.stringify將物件轉為字串
     localStorage.setItem(this.savekey, JSON.stringify(this.movieData));
   }
@@ -38,13 +40,14 @@ export class ArticleService {
     this.isAdminPage = isAdmin;
   }
   /**
-   * @returns 淺拷貝 獲取所有電影清單
-   * addMovie 新增電影清單
+   * 如果是文章管理頁面，返回當前會員的文章
+   * @returns
    */
   public getMovies(): MoviePost[] {
     if (this.isAdminPage) {
-      // 如果是文章管理頁面，返回當前會員的文章
+      // 獲取當前用戶登入訊息的id
       const userId = this.loginService.userSubject$.value.id;
+      // filter()篩選出該會員的文章，只返回 userId 與當前登入會員 ID 相同的文章
       return this.movieData.filter(movie => movie.userId === userId);
     } else {
       // 如果不是文章管理頁面，返回所有的文章

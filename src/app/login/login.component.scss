@@ -17,10 +17,18 @@
 
 .form-login {
   color: var(--text-color);
+  position: relative;
 
   label {
     display: block;
-    margin: 16px auto 10px auto;
+    margin: 10px auto;
+  }
+
+  .error-message {
+    position: absolute;
+    bottom: -30px;
+    left: 0;
+    width: 100%;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { LoginService } from '../service/login.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -50,6 +50,10 @@ export class LoginComponent {
     return this._showPassword;
   }
 
+  public set showPassword(value: boolean) {
+    this._showPassword = value;
+  }
+
   /**
    * @param fb 創建表單的服務，可快速創建 FormGroup、FormControl、驗證邏輯。創建表單_loginForm。
    */
@@ -91,12 +95,12 @@ export class LoginComponent {
       this.loginError = true;
     }
   }
-
+  // 登出
   public onClickLogoutBtn(): void {
     this.loginService.logout();
   }
-
+  // 每次調用onClickEyeBtn()會切換 showPassword 的布林值
   public onClickEyeBtn() {
-    this._showPassword = !this.showPassword;
+    this.showPassword = !this.showPassword;
   }
 }

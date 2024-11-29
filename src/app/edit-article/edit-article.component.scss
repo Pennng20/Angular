@@ -7,9 +7,7 @@ textarea {
   border: 1px solid var(--border-color3);
 }
 
-.namelength,
-.focuslength,
-.contentlength {
+.namelength,.focuslength,.contentlength {
   color: var(--text-color3);
   position: absolute;
   bottom: -25;
@@ -58,4 +56,19 @@ label {
 
 .preview-image {
   max-width: 300px;
+}
+
+.btn-primary {
+  background-color: var(--background-color);
+  border-color: var(--border-color2);
+}
+
+.btn-primary:hover{
+  background-color: var(--background-color2);
+  color: var(--text-color2);
+}
+
+.btn-primary:disabled {
+  background-color: var(--background-color2);
+  color: var(--text-color3);
 }
