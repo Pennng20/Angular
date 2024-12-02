@@ -1,10 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'dateFormat'
+  name: 'dateFormat',
+  standalone: true
 })
 export class DateFormatPipe implements PipeTransform {
-  static transform: any;
 
   // transform方法 接收參數 value
   transform(value: Date | string): string {

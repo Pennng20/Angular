@@ -15,6 +15,7 @@ export class LoginService {
    */
   public userSubject$ = new BehaviorSubject<TempUserData>({ id: 0, username: '', picture: '' });
   public userObserver = this.userSubject$.asObservable();
+  private loggedIn: boolean = false;
 
   /**
    * @localStorage.getItem('user') 會返回存儲在 localStorage 中為 'user' 的值
@@ -40,12 +41,13 @@ export class LoginService {
       (userInfo) => userInfo.password === password && userInfo.email === email
     );
     // 如果有資料則存在localstorage裡
+    // 只存id、username、picture
     if (user) {
       const userData = {
         id: user.id,
         username: user.username,
         picture: user.picture
-      }
+      };
       localStorage.setItem('user', JSON.stringify(userData));
       // userSubject$.next() 更新目前登入的使用者狀態
       this.userSubject$.next(userData);
@@ -56,6 +58,11 @@ export class LoginService {
       return false;
     }
   }
+  // 檢查用戶是否已經登入
+  public isLoggedIn(): boolean {
+    return this.loggedIn;
+  }
+
   //登出、清除資料
   public logout(): void {
     // 清除localstorage裡的資料

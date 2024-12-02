@@ -15,7 +15,7 @@
       </div>
     </ng-container>
 
-    <!-- 如果 user.id === 0 且不是登入頁面，顯示登入按鈕 -->
+    <!-- 如果 user.id === 0 且不是登入頁面，顯示登入按鈕  // 改成函式 帶韓式 -->
     <ng-container *ngIf="user.id === 0 && !isLoginPage()">
       <button (click)="router.navigate(['/login'])" class="btn btn-primary new-btn m-2-5 px-3">登入</button>
     </ng-container>

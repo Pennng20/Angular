@@ -6,14 +6,15 @@ import { ArticleService } from '../service/article.service';
 import { LoginService } from '../service/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { DateFormatPipe } from '../date-format.pipe';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-article',
   standalone: true,
   imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './add-article.component.html',
-  styleUrls: ['./add-article.component.scss']
+  styleUrls: ['./add-article.component.scss'],
+  providers: [DatePipe]
 })
 export class AddArticleComponent {
   /**
@@ -69,7 +70,8 @@ export class AddArticleComponent {
   constructor(
     private fb: FormBuilder,
     private articleService: ArticleService,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private datePipe: DatePipe
   ) {
     this._articleForm = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(20)]],
@@ -112,6 +114,11 @@ export class AddArticleComponent {
         this._imageBase64 = reader.result as string;
         this.articleForm.patchValue({ photo: this.imageBase64 });
       };
+      reader.onerror = () => {
+        // 載入失敗時的預設處理
+        this._imageBase64 = '預設base64圖片';
+        this.articleForm.patchValue({ photo: this._imageBase64 });
+      };
       reader.readAsDataURL(file);
     }
   }
@@ -124,7 +131,8 @@ export class AddArticleComponent {
       const formValue = this.articleForm.value;
       // 從當前用戶的資料中獲取 username
       const authorName = this.loginService.userSubject$.value?.username;
-      // Pipe把 / 改成 -
+
+      // 自定義時間管道格式
       const newMovie: MoviePost = {
         id: this.movies.length + 1,
         name: formValue.name,
@@ -132,7 +140,7 @@ export class AddArticleComponent {
         author: authorName,
         userId: formValue.userId,
         photo: formValue.photo,
-        updateTime: DateFormatPipe.transform(new Date()),
+        updateTime: this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss') || '',
         content: formValue.content
       };
 
@@ -157,5 +165,10 @@ export class AddArticleComponent {
 
   public updateFocusLength(): void {
     this.focusLength = this.articleForm.get('focus')?.value?.length;
+  }
+
+  // 破圖補default圖
+  public onImageError(event: any) {
+    event.target.src = 'assets/default-poster.png';
   }
 }

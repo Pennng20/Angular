@@ -22,9 +22,9 @@
 
   <!-- accept瀏覽器初步過濾 僅允許選擇特定副檔名的檔案 -->
   <label for="photo">上傳圖片</label>
-  <input id="photo" type="file" accept=".jpg,.jpeg,.png,.bmp" (change)="onClickFileSelectBtn($event)">
+  <input id="photo" type="file"  (change)="onClickFileSelectBtn($event)">
 
-  <img *ngIf="imageBase64" [src]="imageBase64" alt="圖片預覽" class="preview-image">
+  <img *ngIf="imageBase64" [src]="imageBase64" (error)="onImageError($event)"  alt="圖片預覽" class="preview-image">
 
   <div class="button">
     <button type="submit" class="btn btn-primary new-btn my-4" [disabled]="articleForm.invalid">新增文章</button>

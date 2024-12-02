@@ -40,7 +40,7 @@ export class EditArticleComponent {
 
   // 內文 限制字數
   public get contentLength(): number {
-    return this._contentLength;
+    return this.articleForm.get('content')?.value.length;
   }
 
   public set contentLength(value: number) {
@@ -217,8 +217,8 @@ export class EditArticleComponent {
    * 計算並返回 contentValue 字符的長度
    */
   public updateContentLength(): void {
-    const contentValue = this.articleForm.get('content')?.value;
-    this.contentLength = contentValue.length;
+    // const contentValue = this.articleForm.get('content')?.value;
+    // this.contentLength = contentValue.length;
   }
 
   public updateNameLength(): void {
